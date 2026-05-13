@@ -1,6 +1,6 @@
 import React from 'react';
-import { 
-  X, Globe, Zap, AlertTriangle, Target, Link, ChevronRight, 
+import {
+  X, Globe, Zap, AlertTriangle, Target, Link, ChevronRight,
   Shield, Eye, Palette, Smartphone, BarChart3, AlertCircle, CheckCircle,
   Download, FileText, Copy, ExternalLink, Sparkles
 } from 'lucide-react';
@@ -32,17 +32,17 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
             )}
           </div>
           <div className="flex items-center gap-4 mt-2">
-            <a 
-              href={lead.website} 
-              target="_blank" 
-              rel="noreferrer" 
+            <a
+              href={lead.website}
+              target="_blank"
+              rel="noreferrer"
               className="text-sm text-brand-primary hover:text-brand-primary/80 flex items-center gap-1.5 transition-colors group"
             >
               <Globe className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
               <span className="underline underline-offset-4 decoration-brand-primary/30 group-hover:decoration-brand-primary">{lead.website}</span>
               <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <button 
+            <button
               onClick={() => {
                 navigator.clipboard.writeText(lead.website || '');
                 // Simple toast or feedback could be added here
@@ -56,17 +56,17 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <a 
-            href={lead.website} 
-            target="_blank" 
+          <a
+            href={lead.website}
+            target="_blank"
             rel="noreferrer"
             className="hidden md:flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-xl text-sm font-semibold hover:bg-brand-primary/90 transition-all shadow-lg shadow-brand-primary/20 active:scale-95"
           >
             Visit Website
             <ExternalLink className="w-4 h-4" />
           </a>
-          <button 
-            onClick={onClose} 
+          <button
+            onClick={onClose}
             className="p-2.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-xl transition-all border border-transparent hover:border-white/10"
           >
             <X className="w-5 h-5" />
@@ -76,39 +76,36 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
-        
+
         {/* Overall Score Banner */}
         {audit && (
-          <div className={`p-4 rounded-xl border ${
-            audit.overallScore >= 80 ? 'bg-emerald-500/10 border-emerald-500/30' :
-            audit.overallScore >= 60 ? 'bg-blue-500/10 border-blue-500/30' :
-            audit.overallScore >= 40 ? 'bg-amber-500/10 border-amber-500/30' :
-            'bg-rose-500/10 border-rose-500/30'
-          }`}>
+          <div className={`p-4 rounded-xl border ${audit.overallScore >= 80 ? 'bg-emerald-500/10 border-emerald-500/30' :
+              audit.overallScore >= 60 ? 'bg-blue-500/10 border-blue-500/30' :
+                audit.overallScore >= 40 ? 'bg-amber-500/10 border-amber-500/30' :
+                  'bg-rose-500/10 border-rose-500/30'
+            }`}>
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-sm text-slate-400">Overall Site Health</span>
                 <div className="flex items-baseline gap-3 mt-1">
                   <span className="text-4xl font-bold text-white">{audit.overallScore}/100</span>
-                  <span className={`text-2xl font-bold ${
-                    audit.overallGrade === 'A' ? 'text-emerald-400' :
-                    audit.overallGrade === 'B' ? 'text-blue-400' :
-                    audit.overallGrade === 'C' ? 'text-amber-400' :
-                    audit.overallGrade === 'D' ? 'text-rose-400' : 'text-slate-400'
-                  }`}>
+                  <span className={`text-2xl font-bold ${audit.overallGrade === 'A' ? 'text-emerald-400' :
+                      audit.overallGrade === 'B' ? 'text-blue-400' :
+                        audit.overallGrade === 'C' ? 'text-amber-400' :
+                          audit.overallGrade === 'D' ? 'text-rose-400' : 'text-slate-400'
+                    }`}>
                     Grade {audit.overallGrade}
                   </span>
                 </div>
               </div>
               <div className="text-right">
                 <div className="text-xs text-slate-500 uppercase tracking-wider">Priority</div>
-                <div className={`text-lg font-semibold mt-1 ${
-                  audit.redFlags?.some((f: any) => f.severity === 'critical') ? 'text-rose-400' :
-                  audit.redFlags?.some((f: any) => f.severity === 'high') ? 'text-amber-400' : 'text-emerald-400'
-                }`}>
+                <div className={`text-lg font-semibold mt-1 ${audit.redFlags?.some((f: any) => f.severity === 'critical') ? 'text-rose-400' :
+                    audit.redFlags?.some((f: any) => f.severity === 'high') ? 'text-amber-400' : 'text-emerald-400'
+                  }`}>
                   {audit.redFlags?.some((f: any) => f.severity === 'critical') ? 'CRITICAL' :
-                   audit.redFlags?.some((f: any) => f.severity === 'high') ? 'HIGH' : 
-                   audit.recommendations?.priority?.toUpperCase() || 'MEDIUM'}
+                    audit.redFlags?.some((f: any) => f.severity === 'high') ? 'HIGH' :
+                      audit.recommendations?.priority?.toUpperCase() || 'MEDIUM'}
                 </div>
               </div>
             </div>
@@ -121,11 +118,10 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
                 <div className="space-y-1">
                   {audit.redFlags.slice(0, 3).map((flag: any, i: number) => (
                     <div key={i} className="text-xs flex items-start gap-2 text-slate-300">
-                      <span className={`mt-0.5 w-2 h-2 rounded-full shrink-0 ${
-                        flag.severity === 'critical' ? 'bg-rose-500' :
-                        flag.severity === 'high' ? 'bg-amber-500' :
-                        flag.severity === 'medium' ? 'bg-blue-500' : 'bg-slate-500'
-                      }`} />
+                      <span className={`mt-0.5 w-2 h-2 rounded-full shrink-0 ${flag.severity === 'critical' ? 'bg-rose-500' :
+                          flag.severity === 'high' ? 'bg-amber-500' :
+                            flag.severity === 'medium' ? 'bg-blue-500' : 'bg-slate-500'
+                        }`} />
                       {flag.message}
                     </div>
                   ))}
@@ -144,16 +140,14 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
             <div className="grid grid-cols-1 gap-3">
               {audit.redFlags?.filter((f: any) => f.severity === 'critical' || f.severity === 'high').map((flag: any, i: number) => (
                 <div key={i} className="flex items-start gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl group hover:bg-white/[0.08] transition-all hover:border-brand-primary/20">
-                  <div className={`p-2 rounded-xl shrink-0 ${
-                    flag.severity === 'critical' ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'
-                  }`}>
+                  <div className={`p-2 rounded-xl shrink-0 ${flag.severity === 'critical' ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'
+                    }`}>
                     <AlertTriangle className="w-5 h-5" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
-                      <h4 className={`text-sm font-bold ${
-                        flag.severity === 'critical' ? 'text-rose-300' : 'text-amber-300'
-                      }`}>
+                      <h4 className={`text-sm font-bold ${flag.severity === 'critical' ? 'text-rose-300' : 'text-amber-300'
+                        }`}>
                         {flag.severity === 'critical' ? 'CRITICAL FIX' : 'HIGH PRIORITY'}
                       </h4>
                       <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter bg-white/5 px-1.5 py-0.5 rounded border border-white/5">
@@ -195,16 +189,32 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
               <div>
                 <h4 className="text-sm font-semibold text-blue-300">Detailed Audit Report Available</h4>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  {audit.overallScore < 60 
+                  {audit.overallScore < 60
                     ? `This site needs urgent help (${audit.overallScore}/100). Download full report to review all issues.`
                     : 'Download comprehensive analysis with ranked fixes and recommendations.'}
                 </p>
               </div>
             </div>
             <button
-              onClick={() => {
-                // TODO: Generate PDF report
-                alert('PDF report generation coming soon! For now, use the scores and data above.');
+              onClick={async () => {
+                try {
+                  const res = await fetch('/api/report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ lead, audit, enrichment })
+                  });
+                  if (!res.ok) throw new Error('Report generation failed');
+                  const blob = await res.blob();
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `audit-report-${(lead?.name || 'site').substring(0, 20).replace(/[^a-zA-Z0-9]/g, '_')}.html`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                } catch (err: any) {
+                  console.error('Report error:', err);
+                  alert(`Failed to generate report: ${err.message}`);
+                }
               }}
               className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors"
             >
@@ -233,41 +243,41 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
         {/* Quick Stats Grid */}
         {audit && (
           <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-            <QuickStat 
-              icon={<Zap className="w-4 h-4" />} 
-              label="Performance" 
-              value={`${audit.performanceScore}`} 
-              color="text-amber-400" 
+            <QuickStat
+              icon={<Zap className="w-4 h-4" />}
+              label="Performance"
+              value={`${audit.performanceScore}`}
+              color="text-amber-400"
             />
-            <QuickStat 
-              icon={<BarChart3 className="w-4 h-4" />} 
-              label="SEO" 
-              value={`${audit.seoScore}`} 
-              color="text-blue-400" 
+            <QuickStat
+              icon={<BarChart3 className="w-4 h-4" />}
+              label="SEO"
+              value={`${audit.seoScore}`}
+              color="text-blue-400"
             />
-            <QuickStat 
-              icon={<Eye className="w-4 h-4" />} 
-              label="Accessibility" 
-              value={`${audit.accessibilityScore}`} 
-              color="text-purple-400" 
+            <QuickStat
+              icon={<Eye className="w-4 h-4" />}
+              label="Accessibility"
+              value={`${audit.accessibilityScore}`}
+              color="text-purple-400"
             />
-            <QuickStat 
-              icon={<Shield className="w-4 h-4" />} 
-              label="Security" 
-              value={`${audit.securityScore}`} 
-              color="text-emerald-400" 
+            <QuickStat
+              icon={<Shield className="w-4 h-4" />}
+              label="Security"
+              value={`${audit.securityScore}`}
+              color="text-emerald-400"
             />
-            <QuickStat 
-              icon={<Palette className="w-4 h-4" />} 
-              label="Design" 
-              value={`${audit.designScore}`} 
-              color="text-pink-400" 
+            <QuickStat
+              icon={<Palette className="w-4 h-4" />}
+              label="Design"
+              value={`${audit.designScore}`}
+              color="text-pink-400"
             />
-            <QuickStat 
-              icon={<Link className="w-4 h-4" />} 
-              label="Broken Links" 
-              value={`${audit.links?.brokenInternal || 0}`} 
-              color="text-rose-400" 
+            <QuickStat
+              icon={<Link className="w-4 h-4" />}
+              label="Broken Links"
+              value={`${audit.links?.brokenInternal || 0}`}
+              color="text-rose-400"
             />
           </div>
         )}
@@ -285,11 +295,11 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
                 <Smartphone className="w-4 h-4" /> Core Web Vitals (Mobile)
               </h4>
               <div className="grid grid-cols-3 gap-4">
-                <Metric label="LCP" value={`${(audit.webVitals?.mobile?.lcp/1000).toFixed(1)}s`} 
-                  good="2.5s" warning="4.0s" actual={audit.webVitals?.mobile?.lcp/1000} />
-                <Metric label="CLS" value={audit.webVitals?.mobile?.cls?.toFixed(3) || 'N/A'} 
+                <Metric label="LCP" value={`${(audit.webVitals?.mobile?.lcp / 1000).toFixed(1)}s`}
+                  good="2.5s" warning="4.0s" actual={audit.webVitals?.mobile?.lcp / 1000} />
+                <Metric label="CLS" value={audit.webVitals?.mobile?.cls?.toFixed(3) || 'N/A'}
                   good="0.1" warning="0.25" actual={audit.webVitals?.mobile?.cls} />
-                <Metric label="INP" value={`${audit.webVitals?.mobile?.inp || 0}ms`} 
+                <Metric label="INP" value={`${audit.webVitals?.mobile?.inp || 0}ms`}
                   good="200ms" warning="500ms" actual={audit.webVitals?.mobile?.inp} />
               </div>
             </div>
@@ -439,7 +449,7 @@ export default function LeadDetailDrawer({ lead, isOpen, onClose }: LeadDetailDr
                   <div key={i} className="group relative bg-white/5 hover:bg-white/[0.08] rounded-xl p-4 border border-white/5 hover:border-brand-primary/30 transition-all">
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-primary/50 group-hover:w-1.5 transition-all rounded-l-xl" />
                     <p className="text-slate-300 text-sm pl-2 leading-relaxed italic">"{hook}"</p>
-                    <button 
+                    <button
                       onClick={() => navigator.clipboard.writeText(hook)}
                       className="absolute top-4 right-4 p-1.5 bg-white/10 rounded-lg text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-white"
                       title="Copy hook"
@@ -514,7 +524,7 @@ function QuickStat({ icon, label, value, color }: { icon: any, label: string, va
 function Metric({ label, value, good, warning, actual }: { label: string, value: string, good: string, warning: string, actual: number }) {
   const goodNum = parseFloat(good);
   const warningNum = parseFloat(warning);
-  
+
   let colorClass = 'text-emerald-400';
   if (actual >= warningNum) colorClass = 'text-rose-400';
   else if (actual >= goodNum) colorClass = 'text-amber-400';
@@ -569,9 +579,9 @@ function GradeCard({ label, grade, score }: { label: string; grade: string; scor
     D: { bg: 'bg-rose-500/15', border: 'border-rose-500/30', text: 'text-rose-400' },
     F: { bg: 'bg-slate-500/15', border: 'border-slate-500/30', text: 'text-slate-400' },
   };
-  
+
   const config = gradeConfig[grade] || gradeConfig.F;
-  
+
   return (
     <div className={`rounded-xl p-3 border ${config.bg} ${config.border}`}>
       <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">{label}</div>

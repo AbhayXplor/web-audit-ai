@@ -6,7 +6,7 @@ import Stats from '@/components/dashboard/Stats';
 import LeadTable from '@/components/dashboard/LeadTable';
 import LeadDetailDrawer from '@/components/dashboard/LeadDetailDrawer';
 import { useLeads } from '@/hooks/useLeads';
-import { Upload, Search, Plus, Trash2 } from 'lucide-react';
+import { Upload, Search, Plus, Trash2, Zap } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { Lead } from '@/types';
 
@@ -16,10 +16,69 @@ export default function Dashboard() {
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [showManualForm, setShowManualForm] = useState(false);
+  const [isBatchAuditing, setIsBatchAuditing] = useState(false);
+  const [batchProgress, setBatchProgress] = useState(0);
+  const [batchId, setBatchId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [manualForm, setManualForm] = useState({
     name: '', website: '', rating: 5, reviews: 0, category: '', phone: '', address: ''
   });
+
+  const handleBatchAudit = async () => {
+    const newLeads = leads.filter(l => l.status === 'new');
+    if (newLeads.length === 0) return;
+
+    setIsBatchAuditing(true);
+    setBatchProgress(0);
+
+    try {
+      const res = await fetch('/api/batch-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          leads: newLeads.map(l => ({ id: l.id, name: l.name, website: l.website }))
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Batch audit failed');
+
+      setBatchId(data.batchId);
+
+      // Poll for progress
+      const pollInterval = setInterval(async () => {
+        const statusRes = await fetch(`/api/batch-audit?id=${data.batchId}`);
+        const status = await statusRes.json();
+        if (statusRes.ok) {
+          setBatchProgress(status.progress);
+
+          // Update leads as they complete
+          status.leads.forEach((l: any, i: number) => {
+            if (l.status === 'completed' && newLeads[i]) {
+              updateLead(newLeads[i].id, { status: 'audited' as const });
+            }
+          });
+
+          if (status.status === 'completed' || status.status === 'failed') {
+            clearInterval(pollInterval);
+            setIsBatchAuditing(false);
+            const completed = status.leads.filter((l: any) => l.status === 'completed').length;
+            const failed = status.leads.filter((l: any) => l.status === 'failed').length;
+            alert(`Batch audit complete: ${completed} succeeded, ${failed} failed`);
+          }
+        }
+      }, 2000);
+
+      // Safety timeout — stop polling after 10 min
+      setTimeout(() => {
+        clearInterval(pollInterval);
+        setIsBatchAuditing(false);
+      }, 600000);
+    } catch (err: any) {
+      console.error('Batch audit error:', err);
+      alert(`Batch audit failed: ${err.message}`);
+      setIsBatchAuditing(false);
+    }
+  };
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -85,31 +144,40 @@ export default function Dashboard() {
     setShowManualForm(false);
   };
 
-  const filteredLeads = leads.filter(lead => 
-    lead.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+  const filteredLeads = leads.filter(lead =>
+    lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     (lead.website && lead.website.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
     <div className="flex min-h-screen bg-background relative overflow-hidden">
       <Sidebar />
-      
+
       <main className="flex-1 p-8 overflow-y-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-display font-bold text-white mb-1">Intelligence Dashboard</h2>
             <p className="text-slate-400">Manage and enrich your local business leads.</p>
           </div>
-          
+
           <div className="flex items-center gap-3">
-            <button 
+            <button
               onClick={() => setShowManualForm(!showManualForm)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-brand-primary/10 text-slate-300 hover:text-brand-primary border border-white/5 hover:border-brand-primary/30 transition-all"
             >
               <Plus className="w-4 h-4" />
               Add Manually
             </button>
-            <button 
+            <button
+              onClick={handleBatchAudit}
+              disabled={leads.filter(l => l.status === 'new').length === 0 || isBatchAuditing}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 hover:text-amber-300 border border-amber-500/20 hover:border-amber-500/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              title={isBatchAuditing ? 'Auditing...' : `Audit ${leads.filter(l => l.status === 'new').length} new leads`}
+            >
+              <Zap className="w-4 h-4" />
+              {isBatchAuditing ? `Auditing ${batchProgress}%` : `Audit All (${leads.filter(l => l.status === 'new').length})`}
+            </button>
+            <button
               onClick={handleDeleteAll}
               disabled={leads.length === 0}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-rose-500/10 text-slate-300 hover:text-rose-400 border border-white/5 hover:border-rose-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -117,14 +185,14 @@ export default function Dashboard() {
               <Trash2 className="w-4 h-4" />
               Clear All
             </button>
-            <input 
-              type="file" 
+            <input
+              type="file"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              className="hidden" 
+              className="hidden"
               ref={fileInputRef}
               onChange={handleFileUpload}
             />
-            <button 
+            <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-primary to-brand-secondary text-white shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed"
@@ -149,49 +217,49 @@ export default function Dashboard() {
                 type="text"
                 placeholder="Business Name *"
                 value={manualForm.name}
-                onChange={e => setManualForm({...manualForm, name: e.target.value})}
+                onChange={e => setManualForm({ ...manualForm, name: e.target.value })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 type="text"
                 placeholder="Website URL *"
                 value={manualForm.website}
-                onChange={e => setManualForm({...manualForm, website: e.target.value})}
+                onChange={e => setManualForm({ ...manualForm, website: e.target.value })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 type="text"
                 placeholder="Category"
                 value={manualForm.category}
-                onChange={e => setManualForm({...manualForm, category: e.target.value})}
+                onChange={e => setManualForm({ ...manualForm, category: e.target.value })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 type="number"
                 placeholder="Rating (0-5)"
                 value={manualForm.rating}
-                onChange={e => setManualForm({...manualForm, rating: e.target.value === '' ? 0 : Number(e.target.value)})}
+                onChange={e => setManualForm({ ...manualForm, rating: e.target.value === '' ? 0 : Number(e.target.value) })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 type="number"
                 placeholder="Review Count"
                 value={manualForm.reviews}
-                onChange={e => setManualForm({...manualForm, reviews: e.target.value === '' ? 0 : Number(e.target.value)})}
+                onChange={e => setManualForm({ ...manualForm, reviews: e.target.value === '' ? 0 : Number(e.target.value) })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 type="text"
                 placeholder="Phone"
                 value={manualForm.phone}
-                onChange={e => setManualForm({...manualForm, phone: e.target.value})}
+                onChange={e => setManualForm({ ...manualForm, phone: e.target.value })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
               />
               <input
                 type="text"
                 placeholder="Address"
                 value={manualForm.address}
-                onChange={e => setManualForm({...manualForm, address: e.target.value})}
+                onChange={e => setManualForm({ ...manualForm, address: e.target.value })}
                 className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white col-span-2"
               />
             </div>
@@ -207,32 +275,32 @@ export default function Dashboard() {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-            <input 
-              type="text" 
-              placeholder="Search business or website..." 
+            <input
+              type="text"
+              placeholder="Search business or website..."
               className="w-full bg-white/5 border border-white/5 rounded-xl py-2.5 pl-10 pr-4 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
+
           <div className="flex items-center gap-3">
             <p className="text-xs text-slate-500 font-medium">Showing {filteredLeads.length} leads</p>
           </div>
         </div>
 
-        <LeadTable 
-          leads={filteredLeads} 
-          onUpdateLead={updateLead} 
+        <LeadTable
+          leads={filteredLeads}
+          onUpdateLead={updateLead}
           onSelectLead={setSelectedLead}
           onDeleteLead={handleDeleteSingle}
         />
       </main>
 
-      <LeadDetailDrawer 
-        lead={selectedLead} 
-        isOpen={!!selectedLead} 
-        onClose={() => setSelectedLead(null)} 
+      <LeadDetailDrawer
+        lead={selectedLead}
+        isOpen={!!selectedLead}
+        onClose={() => setSelectedLead(null)}
       />
     </div>
   );
