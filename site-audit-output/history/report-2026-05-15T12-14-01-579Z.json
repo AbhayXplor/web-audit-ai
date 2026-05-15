@@ -1,0 +1,879 @@
+{
+  "generatedAt": "2026-05-15T12:14:01.579Z",
+  "startUrl": "http://www.afrina.com/",
+  "crawl": {
+    "totalPages": 2,
+    "orphanPages": [],
+    "elapsedMs": 140430,
+    "statusCodeDistribution": {
+      "200": 2
+    },
+    "redirectChains": [
+      {
+        "from": "http://www.afrina.com/",
+        "chain": [
+          "http://www.afrina.com/"
+        ]
+      },
+      {
+        "from": "http://www.afrina.com/shop",
+        "chain": [
+          "http://www.afrina.com/shop"
+        ]
+      }
+    ],
+    "avgTtfb": 322,
+    "avgResponseTime": 2283
+  },
+  "seo": {
+    "pages": [
+      {
+        "url": "http://www.afrina.com/",
+        "title": "Afrina – Group of companies",
+        "metaDescription": null,
+        "h1Count": 0,
+        "canonicalUrl": "https://afrina.com/",
+        "issues": [
+          {
+            "rule": "meta-description-missing",
+            "severity": "warning",
+            "message": "Page is missing a meta description.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "h1-missing",
+            "severity": "error",
+            "message": "Page has no <h1> heading.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"\" alt=\"\" loading=\"lazy\" width=\"0\" height=\"0\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"https://afrina.com/wp-content/uploads/2020/05/AfrinaHomeService.jpg\" alt=\"\" loading=\"lazy\" width=\"150\" height=\"150\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"https://afrina.com/wp-content/uploads/2020/05/AfrinaBeautyCenter.jpg\" alt=\"\" loading=\"lazy\" width=\"150\" height=\"150\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"https://afrina.com/wp-content/uploads/2020/05/AfrinaClub.jpg\" alt=\"\" loading=\"lazy\" width=\"150\" height=\"150\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada.jpg\" alt=\"\" loading=\"lazy\" width=\"150\" height=\"150\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"https://afrina.com/wp-content/uploads/2020/05/Afmetic-Logo.jpg\" alt=\"\" loading=\"lazy\" width=\"150\" height=\"150\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy-Logo.jpg\" alt=\"\" loading=\"lazy\" width=\"150\" height=\"150\" srcset=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" width=\"677\" height=\"677\" src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg\" alt=\"\" loading=\"lazy\" srcset=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg 677w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets-400x400.jpg 400w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets-180x180.jpg 180w\" sizes=\"auto, (max-width: 677px) 100vw, 677px\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service-.jpg\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" width=\"766\" height=\"766\" src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service-.jpg\" alt=\"\" loading=\"lazy\" srcset=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service-.jpg 766w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service--400x400.jpg 400w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service--180x180.jpg 180w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service--300x300.jpg 300w\" sizes=\"auto, (max-width: 766px) 100vw, 766px\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model.jpg\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" width=\"677\" height=\"677\" src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model.jpg\" alt=\"\" loading=\"lazy\" srcset=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model.jpg 677w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model-400x400.jpg 400w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model-180x180.jpg 180w\" sizes=\"auto, (max-width: 677px) 100vw, 677px\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main.jpg\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" width=\"677\" height=\"677\" src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main.jpg\" alt=\"\" loading=\"lazy\" srcset=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main.jpg 677w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main-400x400.jpg 400w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main-180x180.jpg 180w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main-300x300.jpg 300w\" sizes=\"auto, (max-width: 677px) 100vw, 677px\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model.jpg\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" width=\"677\" height=\"677\" src=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model.jpg\" alt=\"\" loading=\"lazy\" srcset=\"https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model.jpg 677w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model-400x400.jpg 400w, https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model-180x180.jpg 180w\" sizes=\"auto, (max-width: 677px) 100vw, 677px\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy.jpg\".",
+            "url": "http://www.afrina.com/",
+            "element": "<img decoding=\"async\" width=\"677\" height=\"677\" src=\"https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy.jpg\" alt=\"\" loading=\"lazy\" srcset=\"https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy.jpg 677w, https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy-400x400.jpg 400w, https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy-180x180.jpg 180w\" sizes=\"auto, (max-width: 677px) 100vw, 677px\">"
+          },
+          {
+            "rule": "og-title-missing",
+            "severity": "info",
+            "message": "Page is missing an og:title meta tag.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "og-description-missing",
+            "severity": "info",
+            "message": "Page is missing an og:description meta tag.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "og-image-missing",
+            "severity": "warning",
+            "message": "Page is missing an og:image meta tag. Social shares will lack a preview image.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "og-url-missing",
+            "severity": "info",
+            "message": "Page is missing an og:url meta tag.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "structured-data-missing",
+            "severity": "info",
+            "message": "Page has no JSON-LD structured data. Adding schema markup can improve rich results.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "twitter-card-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:card meta tag.",
+            "url": "http://www.afrina.com/"
+          },
+          {
+            "rule": "twitter-image-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:image meta tag.",
+            "url": "http://www.afrina.com/"
+          }
+        ]
+      },
+      {
+        "url": "http://www.afrina.com/shop",
+        "title": "Shop – Afrina",
+        "metaDescription": null,
+        "h1Count": 1,
+        "canonicalUrl": "https://afrina.com/shop/",
+        "issues": [
+          {
+            "rule": "meta-description-missing",
+            "severity": "warning",
+            "message": "Page is missing a meta description.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "og-title-missing",
+            "severity": "info",
+            "message": "Page is missing an og:title meta tag.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "og-description-missing",
+            "severity": "info",
+            "message": "Page is missing an og:description meta tag.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "og-image-missing",
+            "severity": "warning",
+            "message": "Page is missing an og:image meta tag. Social shares will lack a preview image.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "og-url-missing",
+            "severity": "info",
+            "message": "Page is missing an og:url meta tag.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "structured-data-missing",
+            "severity": "info",
+            "message": "Page has no JSON-LD structured data. Adding schema markup can improve rich results.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "twitter-card-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:card meta tag.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "twitter-image-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:image meta tag.",
+            "url": "http://www.afrina.com/shop"
+          },
+          {
+            "rule": "thin-content",
+            "severity": "info",
+            "message": "Page has only 27 words. Thin content may rank poorly.",
+            "url": "http://www.afrina.com/shop"
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "error": 1,
+      "warning": 4,
+      "info": 26
+    }
+  },
+  "siteLevel": {
+    "issues": [
+      {
+        "rule": "security-hsts-missing",
+        "severity": "warning",
+        "message": "Missing Strict-Transport-Security header. Browsers won't enforce HTTPS.",
+        "url": "http://www.afrina.com"
+      }
+    ]
+  },
+  "externalLinks": {
+    "checked": 32,
+    "broken": 2,
+    "issues": [
+      {
+        "rule": "external-link-broken",
+        "severity": "warning",
+        "message": "External link to https://afrinabeauty.com/afrina-academy/ returned 404.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "external-link-broken",
+        "severity": "warning",
+        "message": "External link to https://www.linkedin.com/in/afrina-beauty-training-center-3a8295198/ returned 999.",
+        "url": "http://www.afrina.com/"
+      }
+    ]
+  },
+  "accessibility": {
+    "issues": [
+      {
+        "rule": "a11y-form-label-missing",
+        "severity": "warning",
+        "message": "2 form field(s) have no associated <label>, aria-label, or aria-labelledby.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "a11y-skip-nav-missing",
+        "severity": "info",
+        "message": "Page has no skip navigation link. Keyboard users must tab through all nav items.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "a11y-form-label-missing",
+        "severity": "warning",
+        "message": "1 form field(s) have no associated <label>, aria-label, or aria-labelledby.",
+        "url": "http://www.afrina.com/shop"
+      },
+      {
+        "rule": "a11y-skip-nav-missing",
+        "severity": "info",
+        "message": "Page has no skip navigation link. Keyboard users must tab through all nav items.",
+        "url": "http://www.afrina.com/shop"
+      }
+    ]
+  },
+  "crawlAnalysis": {
+    "issues": []
+  },
+  "resources": {
+    "issues": [
+      {
+        "rule": "resource-render-blocking",
+        "severity": "warning",
+        "message": "2 script(s) in <head> without async/defer are render-blocking: jquery.min.js, jquery-migrate.min.js",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "resource-render-blocking",
+        "severity": "warning",
+        "message": "2 script(s) in <head> without async/defer are render-blocking: jquery.min.js, jquery-migrate.min.js",
+        "url": "http://www.afrina.com/shop"
+      }
+    ]
+  },
+  "contentAnalysis": {
+    "duplicateGroups": [],
+    "issues": []
+  },
+  "imageOptimization": {
+    "issues": [
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service-.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "http://www.afrina.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "http://www.afrina.com/"
+      }
+    ]
+  },
+  "lighthouse": {
+    "sampledUrls": [
+      "http://www.afrina.com/",
+      "http://www.afrina.com/shop"
+    ],
+    "pages": [
+      {
+        "url": "http://www.afrina.com/",
+        "performanceScore": 77,
+        "cwv": {
+          "lcp": 3700.14051,
+          "inp": null,
+          "cls": 0.000518
+        },
+        "opportunities": [
+          {
+            "title": "Avoid multiple page redirects",
+            "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+            "estimatedSavingsMs": 1651.28808,
+            "estimatedSavingsBytes": null
+          },
+          {
+            "title": "Eliminate render-blocking resources",
+            "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+            "estimatedSavingsMs": 846,
+            "estimatedSavingsBytes": null
+          },
+          {
+            "title": "Reduce unused CSS",
+            "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/).",
+            "estimatedSavingsMs": 250,
+            "estimatedSavingsBytes": 28128
+          },
+          {
+            "title": "Minify CSS",
+            "description": "Minifying CSS files can reduce network payload sizes. [Learn how to minify CSS](https://developer.chrome.com/docs/lighthouse/performance/unminified-css/).",
+            "estimatedSavingsMs": 150,
+            "estimatedSavingsBytes": 7477
+          },
+          {
+            "title": "Minify JavaScript",
+            "description": "Minifying JavaScript files can reduce payload sizes and script parse time. [Learn how to minify JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 13127
+          },
+          {
+            "title": "Reduce unused JavaScript",
+            "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 21801
+          },
+          {
+            "title": "Serve images in next-gen formats",
+            "description": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. [Learn more about modern image formats](https://developer.chrome.com/docs/lighthouse/performance/uses-webp-images/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 990201.95
+          },
+          {
+            "title": "Efficiently encode images",
+            "description": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 747411
+          },
+          {
+            "title": "Properly size images",
+            "description": "Serve images that are appropriately-sized to save cellular data and improve load time. [Learn how to size images](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 208051
+          },
+          {
+            "title": "Avoid serving legacy JavaScript to modern browsers",
+            "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/baseline) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 0
+          }
+        ]
+      },
+      {
+        "url": "http://www.afrina.com/shop",
+        "performanceScore": 81,
+        "cwv": {
+          "lcp": 3767.817,
+          "inp": null,
+          "cls": 0.00040100000000000004
+        },
+        "opportunities": [
+          {
+            "title": "Avoid multiple page redirects",
+            "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+            "estimatedSavingsMs": 2056.7615,
+            "estimatedSavingsBytes": null
+          },
+          {
+            "title": "Eliminate render-blocking resources",
+            "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+            "estimatedSavingsMs": 584,
+            "estimatedSavingsBytes": null
+          },
+          {
+            "title": "Minify CSS",
+            "description": "Minifying CSS files can reduce network payload sizes. [Learn how to minify CSS](https://developer.chrome.com/docs/lighthouse/performance/unminified-css/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 7477
+          },
+          {
+            "title": "Minify JavaScript",
+            "description": "Minifying JavaScript files can reduce payload sizes and script parse time. [Learn how to minify JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 21715
+          },
+          {
+            "title": "Reduce unused JavaScript",
+            "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 24741
+          },
+          {
+            "title": "Avoid serving legacy JavaScript to modern browsers",
+            "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/baseline) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+            "estimatedSavingsMs": 0,
+            "estimatedSavingsBytes": 16640
+          }
+        ]
+      }
+    ],
+    "cwvSummary": {
+      "p50": {
+        "lcp": 3700.14051,
+        "inp": null,
+        "cls": 0.00040100000000000004
+      },
+      "p95": {
+        "lcp": 3767.817,
+        "inp": null,
+        "cls": 0.000518
+      }
+    },
+    "topOffenders": [
+      {
+        "url": "http://www.afrina.com/shop",
+        "metric": "LCP",
+        "value": 3767.817
+      },
+      {
+        "url": "http://www.afrina.com/",
+        "metric": "LCP",
+        "value": 3700.14051
+      }
+    ]
+  },
+  "rankedFixes": [
+    {
+      "title": "Add missing H1 headings",
+      "description": "Page has no <h1> heading.",
+      "impact": "high",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "seo",
+      "rank": 1,
+      "score": 9
+    },
+    {
+      "title": "Add meta descriptions",
+      "description": "Page is missing a meta description.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 2,
+      "score": 6
+    },
+    {
+      "title": "Add Open Graph image tags",
+      "description": "Page is missing an og:image meta tag. Social shares will lack a preview image.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 3,
+      "score": 6
+    },
+    {
+      "title": "Add Strict-Transport-Security header",
+      "description": "Missing Strict-Transport-Security header. Browsers won't enforce HTTPS.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com"
+      ],
+      "category": "security",
+      "rank": 4,
+      "score": 6
+    },
+    {
+      "title": "Add labels to form fields",
+      "description": "2 form field(s) have no associated <label>, aria-label, or aria-labelledby.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "accessibility",
+      "rank": 5,
+      "score": 6
+    },
+    {
+      "title": "Defer render-blocking scripts",
+      "description": "2 script(s) in <head> without async/defer are render-blocking: jquery.min.js, jquery-migrate.min.js",
+      "impact": "high",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 6,
+      "score": 6
+    },
+    {
+      "title": "Avoid multiple page redirects",
+      "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+      "impact": "high",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 7,
+      "score": 6
+    },
+    {
+      "title": "Add JSON-LD structured data",
+      "description": "Page has no JSON-LD structured data. Adding schema markup can improve rich results.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 8,
+      "score": 4
+    },
+    {
+      "title": "Fix broken external links",
+      "description": "External link to https://afrinabeauty.com/afrina-academy/ returned 404.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "seo",
+      "rank": 9,
+      "score": 4
+    },
+    {
+      "title": "Convert images to WebP/AVIF",
+      "description": "Image \"https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "images",
+      "rank": 10,
+      "score": 4
+    },
+    {
+      "title": "Eliminate render-blocking resources",
+      "description": "Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. [Learn how to eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 11,
+      "score": 4
+    },
+    {
+      "title": "Review empty alt attributes",
+      "description": "Image has an empty alt attribute (OK if decorative): src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\".",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "images",
+      "rank": 12,
+      "score": 3
+    },
+    {
+      "title": "Add Open Graph title tags",
+      "description": "Page is missing an og:title meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 13,
+      "score": 3
+    },
+    {
+      "title": "Add Open Graph description tags",
+      "description": "Page is missing an og:description meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 14,
+      "score": 3
+    },
+    {
+      "title": "Add Open Graph URL tags",
+      "description": "Page is missing an og:url meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 15,
+      "score": 3
+    },
+    {
+      "title": "Add Twitter Card meta tags",
+      "description": "Page is missing a twitter:card meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 16,
+      "score": 3
+    },
+    {
+      "title": "Add Twitter Card image tags",
+      "description": "Page is missing a twitter:image meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 17,
+      "score": 3
+    },
+    {
+      "title": "Add skip navigation link",
+      "description": "Page has no skip navigation link. Keyboard users must tab through all nav items.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "accessibility",
+      "rank": 18,
+      "score": 3
+    },
+    {
+      "title": "Improve LCP score",
+      "description": "LCP value of 3768 exceeds threshold.",
+      "impact": "high",
+      "effort": "high",
+      "affectedUrls": [
+        "http://www.afrina.com/shop",
+        "http://www.afrina.com/"
+      ],
+      "category": "performance",
+      "rank": 19,
+      "score": 3
+    },
+    {
+      "title": "Add more content to thin pages",
+      "description": "Page has only 27 words. Thin content may rank poorly.",
+      "impact": "medium",
+      "effort": "high",
+      "affectedUrls": [
+        "http://www.afrina.com/shop"
+      ],
+      "category": "seo",
+      "rank": 20,
+      "score": 2
+    },
+    {
+      "title": "Reduce unused CSS",
+      "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "performance",
+      "rank": 21,
+      "score": 2
+    },
+    {
+      "title": "Minify CSS",
+      "description": "Minifying CSS files can reduce network payload sizes. [Learn how to minify CSS](https://developer.chrome.com/docs/lighthouse/performance/unminified-css/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 22,
+      "score": 2
+    },
+    {
+      "title": "Minify JavaScript",
+      "description": "Minifying JavaScript files can reduce payload sizes and script parse time. [Learn how to minify JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 23,
+      "score": 2
+    },
+    {
+      "title": "Reduce unused JavaScript",
+      "description": "Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 24,
+      "score": 2
+    },
+    {
+      "title": "Serve images in next-gen formats",
+      "description": "Image formats like WebP and AVIF often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. [Learn more about modern image formats](https://developer.chrome.com/docs/lighthouse/performance/uses-webp-images/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "performance",
+      "rank": 25,
+      "score": 2
+    },
+    {
+      "title": "Efficiently encode images",
+      "description": "Optimized images load faster and consume less cellular data. [Learn how to efficiently encode images](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "performance",
+      "rank": 26,
+      "score": 2
+    },
+    {
+      "title": "Properly size images",
+      "description": "Serve images that are appropriately-sized to save cellular data and improve load time. [Learn how to size images](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/).",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/"
+      ],
+      "category": "performance",
+      "rank": 27,
+      "score": 2
+    },
+    {
+      "title": "Avoid serving legacy JavaScript to modern browsers",
+      "description": "Polyfills and transforms enable legacy browsers to use new JavaScript features. However, many aren't necessary for modern browsers. Consider modifying your JavaScript build process to not transpile [Baseline](https://web.dev/baseline) features, unless you know you must support legacy browsers. [Learn why most sites can deploy ES6+ code without transpiling](https://philipwalton.com/articles/the-state-of-es5-on-the-web/)",
+      "impact": "low",
+      "effort": "medium",
+      "affectedUrls": [
+        "http://www.afrina.com/",
+        "http://www.afrina.com/shop"
+      ],
+      "category": "performance",
+      "rank": 28,
+      "score": 2
+    }
+  ]
+}

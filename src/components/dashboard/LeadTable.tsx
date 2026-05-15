@@ -56,13 +56,18 @@ export default function LeadTable({ leads, onUpdateLead, onSelectLead, onDeleteL
         // Try enrichment without screenshots first to avoid payload issues
         onUpdateLead(lead.id, { status: 'enriching' });
 
-        // Prune audit data to avoid payload limits - remove heavy screenshot data
+        // Prune audit data to avoid payload limits
         const prunedAudit = lead.audit ? JSON.parse(JSON.stringify(lead.audit)) : null;
         if (prunedAudit) {
           delete prunedAudit.raw;
-          // Remove screenshots for enrichment (they're large, and text analysis is enough)
-          delete prunedAudit.screenshotDesktop;
+          // Keep screenshots — Gemini Vision uses them for visual design & content analysis
+          // (Compress: keep only desktop full-page for visual analysis, remove mobile to save payload)
           delete prunedAudit.screenshotMobile;
+          // Also remove metadata fields
+          delete prunedAudit._designMetrics;
+          delete prunedAudit._conversion;
+          delete prunedAudit._mobileChecks;
+          delete prunedAudit._linkCheck;
           // Slice large arrays just in case
           if (prunedAudit.links?.redirectChains) prunedAudit.links.redirectChains = prunedAudit.links.redirectChains.slice(0, 50);
           if (prunedAudit.links?.orphanPages) prunedAudit.links.orphanPages = prunedAudit.links.orphanPages.slice(0, 50);

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Audit Report - http://www.afrina.com/</title>
+  <style>
+    :root { --bg: #f8f9fa; --card: #fff; --border: #dee2e6; --text: #212529; --muted: #6c757d; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1.4rem; margin: 2rem 0 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+    h3 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; }
+    h4 { font-size: 1rem; margin: 1rem 0 0.5rem; color: var(--muted); word-break: break-all; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; }
+    .card .label { font-size: 0.85rem; color: var(--muted); }
+    .card .value { font-size: 1.5rem; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: var(--card); border-radius: 8px; overflow: hidden; }
+    th, td { text-align: left; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
+    th { background: #e9ecef; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    tr:last-child td { border-bottom: none; }
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin: 0.35rem 0; }
+    .toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0 2rem; }
+    .toc a { color: #0366d6; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Site Audit Report</h1>
+  <p class="meta">http://www.afrina.com/ &mdash; Generated 2026-05-15T12:14:01.579Z</p>
+
+  <div class="toc">
+    <strong>Contents:</strong>
+    
+    <a href="#summary">Summary</a> |
+    <a href="#fixes">Ranked Fixes</a> |
+    <a href="#seo">SEO Issues</a> |
+    <a href="#site-level">Site-Level</a> |
+    <a href="#a11y">Accessibility</a> |
+    <a href="#ext-links">External Links</a> |
+    <a href="#crawl-analysis">Crawl Analysis</a> |
+    <a href="#resources">Resources</a> |
+    <a href="#content">Content</a> |
+    <a href="#images">Images</a> |
+    <a href="#lighthouse">Lighthouse</a>
+  </div>
+
+  
+
+  <h2 id="summary">Crawl Summary</h2>
+  <div class="summary-grid">
+    <div class="card"><div class="label">Pages Crawled</div><div class="value">2</div></div>
+    <div class="card"><div class="label">Orphan Pages</div><div class="value">0</div></div>
+    <div class="card"><div class="label">Crawl Time</div><div class="value">140.4s</div></div>
+    <div class="card"><div class="label">Total Issues</div><div class="value">46</div></div>
+    <div class="card"><div class="label">SEO Errors</div><div class="value" style="color:#dc3545">1</div></div>
+    <div class="card"><div class="label">SEO Warnings</div><div class="value" style="color:#ffc107">4</div></div>
+    <div class="card"><div class="label">Avg TTFB</div><div class="value">322ms</div></div>
+    <div class="card"><div class="label">Avg Response</div><div class="value">2283ms</div></div>
+  </div>
+
+  <h3>Status Codes</h3>
+  <table><tr><th>Code</th><th>Count</th></tr><tr><td>200</td><td>2</td></tr></table>
+
+  <h2 id="fixes">Ranked Fix List (Impact x Effort)</h2>
+  <table>
+    <tr><th>#</th><th>Fix</th><th>Impact</th><th>Effort</th><th>Score</th><th>Pages</th><th>Category</th></tr>
+    
+      <tr>
+        <td>1</td>
+        <td>Add missing H1 headings</td>
+        <td><span style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">high</span></td>
+        <td>low</td>
+        <td>9</td>
+        <td>1</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Add meta descriptions</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>low</td>
+        <td>6</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Add Open Graph image tags</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>low</td>
+        <td>6</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Add Strict-Transport-Security header</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>low</td>
+        <td>6</td>
+        <td>1</td>
+        <td>security</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Add labels to form fields</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>low</td>
+        <td>6</td>
+        <td>2</td>
+        <td>accessibility</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Defer render-blocking scripts</td>
+        <td><span style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">high</span></td>
+        <td>medium</td>
+        <td>6</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Avoid multiple page redirects</td>
+        <td><span style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">high</span></td>
+        <td>medium</td>
+        <td>6</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Add JSON-LD structured data</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>medium</td>
+        <td>4</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Fix broken external links</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>medium</td>
+        <td>4</td>
+        <td>1</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Convert images to WebP/AVIF</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>medium</td>
+        <td>4</td>
+        <td>1</td>
+        <td>images</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Eliminate render-blocking resources</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>medium</td>
+        <td>4</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Review empty alt attributes</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>1</td>
+        <td>images</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>Add Open Graph title tags</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>Add Open Graph description tags</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td>Add Open Graph URL tags</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td>Add Twitter Card meta tags</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>Add Twitter Card image tags</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>2</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td>Add skip navigation link</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>low</td>
+        <td>3</td>
+        <td>2</td>
+        <td>accessibility</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td>Improve LCP score</td>
+        <td><span style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">high</span></td>
+        <td>high</td>
+        <td>3</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>Add more content to thin pages</td>
+        <td><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;">medium</span></td>
+        <td>high</td>
+        <td>2</td>
+        <td>1</td>
+        <td>seo</td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td>Reduce unused CSS</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>1</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>22</td>
+        <td>Minify CSS</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>23</td>
+        <td>Minify JavaScript</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>24</td>
+        <td>Reduce unused JavaScript</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td>Serve images in next-gen formats</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>1</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>26</td>
+        <td>Efficiently encode images</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>1</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>27</td>
+        <td>Properly size images</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>1</td>
+        <td>performance</td>
+      </tr>
+      <tr>
+        <td>28</td>
+        <td>Avoid serving legacy JavaScript to modern browsers</td>
+        <td><span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;">low</span></td>
+        <td>medium</td>
+        <td>2</td>
+        <td>2</td>
+        <td>performance</td>
+      </tr>
+  </table>
+
+  <h2 id="seo">SEO Issues</h2>
+  <h4>http://www.afrina.com/</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>meta-description-missing</strong>: Page is missing a meta description.</li><li><span style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">ERROR</span> <strong>h1-missing</strong>: Page has no &lt;h1&gt; heading.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service-.jpg&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model.jpg&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main.jpg&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model.jpg&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-empty-alt</strong>: Image has an empty alt attribute (OK if decorative): src=&quot;https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy.jpg&quot;.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>og-title-missing</strong>: Page is missing an og:title meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>og-description-missing</strong>: Page is missing an og:description meta tag.</li><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>og-image-missing</strong>: Page is missing an og:image meta tag. Social shares will lack a preview image.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>og-url-missing</strong>: Page is missing an og:url meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>structured-data-missing</strong>: Page has no JSON-LD structured data. Adding schema markup can improve rich results.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>twitter-card-missing</strong>: Page is missing a twitter:card meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>twitter-image-missing</strong>: Page is missing a twitter:image meta tag.</li></ul><h4>http://www.afrina.com/shop</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>meta-description-missing</strong>: Page is missing a meta description.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>og-title-missing</strong>: Page is missing an og:title meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>og-description-missing</strong>: Page is missing an og:description meta tag.</li><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>og-image-missing</strong>: Page is missing an og:image meta tag. Social shares will lack a preview image.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>og-url-missing</strong>: Page is missing an og:url meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>structured-data-missing</strong>: Page has no JSON-LD structured data. Adding schema markup can improve rich results.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>twitter-card-missing</strong>: Page is missing a twitter:card meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>twitter-image-missing</strong>: Page is missing a twitter:image meta tag.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>thin-content</strong>: Page has only 27 words. Thin content may rank poorly.</li></ul>
+
+  <h2 id="site-level">Site-Level Checks</h2>
+  <h4>http://www.afrina.com</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>security-hsts-missing</strong>: Missing Strict-Transport-Security header. Browsers won't enforce HTTPS.</li></ul>
+
+  <h2 id="a11y">Accessibility</h2>
+  <h4>http://www.afrina.com/</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>a11y-form-label-missing</strong>: 2 form field(s) have no associated &lt;label&gt;, aria-label, or aria-labelledby.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>a11y-skip-nav-missing</strong>: Page has no skip navigation link. Keyboard users must tab through all nav items.</li></ul><h4>http://www.afrina.com/shop</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>a11y-form-label-missing</strong>: 1 form field(s) have no associated &lt;label&gt;, aria-label, or aria-labelledby.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>a11y-skip-nav-missing</strong>: Page has no skip navigation link. Keyboard users must tab through all nav items.</li></ul>
+
+  <h2 id="ext-links">External Links</h2>
+  <p>Checked 32 external links. <strong>2 broken.</strong></p><table><tr><th>Broken URL</th><th>Status</th><th>Found On</th></tr><tr>
+          <td style="word-break:break-all;">https://afrinabeauty.com/afrina-academy/</td>
+          <td>404</td>
+          <td>1 page</td>
+        </tr><tr>
+          <td style="word-break:break-all;">https://www.linkedin.com/in/afrina-beauty-training-center-3a8295198/</td>
+          <td>999</td>
+          <td>1 page</td>
+        </tr></table>
+
+  <h2 id="crawl-analysis">Crawl Analysis</h2>
+  <p>No crawl issues found.</p>
+
+  <h2 id="resources">Resource Analysis</h2>
+  <h4>http://www.afrina.com/</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>resource-render-blocking</strong>: 2 script(s) in &lt;head&gt; without async/defer are render-blocking: jquery.min.js, jquery-migrate.min.js</li></ul><h4>http://www.afrina.com/shop</h4><ul><li><span style="background:#ffc107;color:#000;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">WARNING</span> <strong>resource-render-blocking</strong>: 2 script(s) in &lt;head&gt; without async/defer are render-blocking: jquery.min.js, jquery-migrate.min.js</li></ul>
+
+  <h2 id="content">Content Analysis</h2>
+  <p>No content issues found.</p>
+
+  <h2 id="images">Image Optimization</h2>
+  <h4>http://www.afrina.com/</h4><ul><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-format-not-optimal</strong>: Image &quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Sweets.jpg&quot; uses JPG. Consider WebP or AVIF for smaller files.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-format-not-optimal</strong>: Image &quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Home-Service-.jpg&quot; uses JPG. Consider WebP or AVIF for smaller files.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-format-not-optimal</strong>: Image &quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Center-Model.jpg&quot; uses JPG. Consider WebP or AVIF for smaller files.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-format-not-optimal</strong>: Image &quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Beauty-Club-Afrina-Main.jpg&quot; uses JPG. Consider WebP or AVIF for smaller files.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-format-not-optimal</strong>: Image &quot;https://afrina.com/wp-content/uploads/2020/05/Afrina-Canada-Model.jpg&quot; uses JPG. Consider WebP or AVIF for smaller files.</li><li><span style="background:#17a2b8;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600;">INFO</span> <strong>img-format-not-optimal</strong>: Image &quot;https://afrina.com/wp-content/uploads/2020/06/Afrina-Academy.jpg&quot; uses JPG. Consider WebP or AVIF for smaller files.</li></ul>
+
+  <h2 id="lighthouse">Lighthouse Performance</h2>
+  
+      <h3>Core Web Vitals Summary</h3>
+      <table>
+        <tr><th>Metric</th><th>p50</th><th>p95</th></tr>
+        <tr><td>LCP (ms)</td><td>3700</td><td>3768</td></tr>
+        <tr><td>INP (ms)</td><td>N/A</td><td>N/A</td></tr>
+        <tr><td>CLS</td><td>0.000</td><td>0.001</td></tr>
+      </table>
+      <h3>Page Scores</h3>
+      <table>
+        <tr><th>URL</th><th>Perf Score</th><th>LCP</th><th>CLS</th><th>Opportunities</th></tr>
+        <tr>
+              <td>http://www.afrina.com/</td>
+              <td>77</td>
+              <td>3700 ms</td>
+              <td>0.001</td>
+              <td>10</td>
+            </tr><tr>
+              <td>http://www.afrina.com/shop</td>
+              <td>81</td>
+              <td>3768 ms</td>
+              <td>0.000</td>
+              <td>6</td>
+            </tr>
+      </table>
+        <h3>Top Offenders</h3>
+        <table>
+          <tr><th>URL</th><th>Metric</th><th>Value</th></tr>
+          <tr><td>http://www.afrina.com/shop</td><td>LCP</td><td>3768</td></tr><tr><td>http://www.afrina.com/</td><td>LCP</td><td>3700</td></tr>
+        </table>
+
+  <footer>Generated by site-audit v1.0.0</footer>
+</body>
+</html>

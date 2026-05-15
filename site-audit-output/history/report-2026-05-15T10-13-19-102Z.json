@@ -1,0 +1,755 @@
+{
+  "generatedAt": "2026-05-15T10:13:19.102Z",
+  "startUrl": "https://ivydubai.com/",
+  "crawl": {
+    "totalPages": 2,
+    "orphanPages": [],
+    "elapsedMs": 26058,
+    "statusCodeDistribution": {
+      "200": 2
+    },
+    "redirectChains": [
+      {
+        "from": "https://ivydubai.com/book-visit",
+        "chain": [
+          "https://ivydubai.com/book-visit",
+          "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/673961872/?random=1740317440&cv=11&fst=1778839931401&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65e0h2v872145629z8847118732za20gzb847118732zd847118732xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468&u_w=1280&u_h=720&url=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&rcb=17&label=iSKXCMjc5dsDEJCvr8EC&capi=1&frm=0&tiba=book%20visit%20%E2%80%93%20IVY%20Beauty%20%26%20Bubbles%20Dubai&did=dZGIzZG&gdid=dZGIzZG&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1085761138.1778839929&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=1~0~0~0&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHm5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgSN4b0t&eitems=ChEI8Iib0AYQ2-We-7fk_puDARIdAO-tjSFKYMKYKfpAEwHbsk1EB60LN038rjp0Iv0&fsk=ChEI8Iib0AYQ2_mzwZ64-Z_AARIsAKjuIzKg8G_HA5Tk-sUXt-kEWvGiJUJp7CFUPmfPNFJmoQ-iK5C8SKkyVyAaAhjj&pscrd=IhMIjZW7kYe7lAMVIpcnAh1FxCQnMgwIA2IICAAQABgAIAAyDAgEYggIABAAGAAgADIMCAdiCAgAEAAYACAAMgwICGIICAAQABgAIAAyDAgJYggIABAAGAAgADIMCApiCAgAEAAYACAAMgwIAmIICAAQABgAIAAyDAgLYggIABAAGAAgADIMCBViCAgAEAAYACAAMgwIH2IICAAQABgAIAAyDAgTYggIABAAGAAgADIMCBJiCAgAEAAYACAAOhVodHRwczovL2l2eWR1YmFpLmNvbS9CWENoRUk4SWliMEFZUTRiSEUxWkh4ektyNkFSSXRBSkp2aGZZaERFVV85c0NVVmI1b2F3RWJHQzF2dnpuMU12OE9adzdHSU0yUEdxbzVMc0g3bFNSdlE1WHd6DAgJYggIABAAGAAgAA",
+          "https://www.google.com/pagead/1p-conversion/673961872/?random=1740317440&cv=11&fst=1778839931401&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65e0h2v872145629z8847118732za20gzb847118732zd847118732xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468&u_w=1280&u_h=720&url=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&rcb=17&label=iSKXCMjc5dsDEJCvr8EC&capi=1&frm=0&tiba=book%20visit%20%E2%80%93%20IVY%20Beauty%20%26%20Bubbles%20Dubai&did=dZGIzZG&gdid=dZGIzZG&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1085761138.1778839929&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=1~0~0~0&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKHm5vdC1uYXZpZ2F0aW9uLXNvdXJjZSwgdHJpZ2dlcloDCgEBYgMKAQM&cerd=CgSN4b0t&fsk=ChEI8Iib0AYQ2_mzwZ64-Z_AARIsAKjuIzKg8G_HA5Tk-sUXt-kEWvGiJUJp7CFUPmfPNFJmoQ-iK5C8SKkyVyAaAhjj&pscrd=IhMIjZW7kYe7lAMVIpcnAh1FxCQnMgwIA2IICAAQABgAIAAyDAgEYggIABAAGAAgADIMCAdiCAgAEAAYACAAMgwICGIICAAQABgAIAAyDAgJYggIABAAGAAgADIMCApiCAgAEAAYACAAMgwIAmIICAAQABgAIAAyDAgLYggIABAAGAAgADIMCBViCAgAEAAYACAAMgwIH2IICAAQABgAIAAyDAgTYggIABAAGAAgADIMCBJiCAgAEAAYACAAOhVodHRwczovL2l2eWR1YmFpLmNvbS9CWENoRUk4SWliMEFZUTRiSEUxWkh4ektyNkFSSXRBSkp2aGZZaERFVV85c0NVVmI1b2F3RWJHQzF2dnpuMU12OE9adzdHSU0yUEdxbzVMc0g3bFNSdlE1WHd6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQSsQEABaugfWeaXF9chjm_8vP3t6ajvLjKq-GgmNs8FhgQ98CTD5loM6hxdum4Qel1JTnCLBb_K1P2IjMjO5nvXJTHz9dz9IP8bjmb6-qfyhV6LBqOmRIeOa7lm9PdzMgoNXG3iauz7nyxxcQTS-3XSlLs4pTHWHXB5fhSpmw1ISK7VhacD_6q-NL_poxEqZClPwTghGxVs4jdXx0KysHC55vDxGSvKffvg-4XjFMjGORwTf8&eitems=ChEI8Iib0AYQ2-We-7fk_puDARIdAO-tjSG-lkd_KyEQGFXZVwc_EDdfyK6wY2s63AE&random=3944202636",
+          "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/673961872/?random=1937942830&cv=11&fst=1778839931412&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65e0h2v872145629z8847118732za20gzb847118732zd847118732xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468&u_w=1280&u_h=720&url=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&rcb=17&label=iSKXCMjc5dsDEJCvr8EC&capi=1&frm=0&tiba=book%20visit%20%E2%80%93%20IVY%20Beauty%20%26%20Bubbles%20Dubai&did=dZGIzZG&gdid=dZGIzZG&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1085761138.1778839929&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=2~0~0~0&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK25vdC1ldmVudC1zb3VyY2U7bmF2aWdhdGlvbi1zb3VyY2UsIHRyaWdnZXJaAwoBAWIDCgED&cerd=CgSN4b0t&eitems=ChEI8Iib0AYQ2-We-7fk_puDARIdAO-tjSEdu3cc1UE-BplEHqG_h-4Libov8f5B2J0&fsk=ChEI8Iib0AYQ2_mzwZ64-Z_AARIsAKjuIzJdwFJjOkK0zdwIS8dWlg1A0gdBdG4OF6VUtElmriotLXYJ05_VihcaAoJJ&pscrd=IhMIhJu7kYe7lAMVm5InAh1yuR3mMgwIA2IICAAQABgAIAAyDAgEYggIABAAGAAgADIMCAdiCAgAEAAYACAAMgwICGIICAAQABgAIAAyDAgJYggIABAAGAAgADIMCApiCAgAEAAYACAAMgwIAmIICAAQABgAIAAyDAgLYggIABAAGAAgADIMCBViCAgAEAAYACAAMgwIH2IICAAQABgAIAAyDAgTYggIABAAGAAgADIMCBJiCAgAEAAYACAAOhVodHRwczovL2l2eWR1YmFpLmNvbS9CWENoRUk4SWliMEFZUTRiSEUxWkh4ektyNkFSSXRBSkp2aGZadXl3c1lGc2ZBMERnbC1aZkVQSUZ5VkJzbGRnNERPRWRZS1ZoaDRPMWQ2UzVFVzk0ckRGOTh6DAgJYggIABAAGAAgAA",
+          "https://www.google.com/pagead/1p-conversion/673961872/?random=1937942830&cv=11&fst=1778839931412&fmt=8&bg=ffffff&guid=ON&async=1&en=conversion&gtm=45be65e0h2v872145629z8847118732za20gzb847118732zd847118732xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938468&u_w=1280&u_h=720&url=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&rcb=17&label=iSKXCMjc5dsDEJCvr8EC&capi=1&frm=0&tiba=book%20visit%20%E2%80%93%20IVY%20Beauty%20%26%20Bubbles%20Dubai&did=dZGIzZG&gdid=dZGIzZG&value=0&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1085761138.1778839929&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=Windows&uapv=19.0.0&uaw=0&ec_mode=a&_tu=CA&gcl_ctr=2~0~0~0&category=acrcp_v1_512&em=tv.1&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCKG4sQIIscGxAgiwwbECCLHDsQIIisWxAgjCybECCLTGsQIIk9qxAgjb3LECCIfbsQII08WxAgjrzLECCO3OsQII1c-xAgj02rECCJfUsQIIyduxAgix4bECCLPhsQIIpt2xAgiw3rECCIDbsQJKK25vdC1ldmVudC1zb3VyY2U7bmF2aWdhdGlvbi1zb3VyY2UsIHRyaWdnZXJaAwoBAWIDCgED&cerd=CgSN4b0t&fsk=ChEI8Iib0AYQ2_mzwZ64-Z_AARIsAKjuIzJdwFJjOkK0zdwIS8dWlg1A0gdBdG4OF6VUtElmriotLXYJ05_VihcaAoJJ&pscrd=IhMIhJu7kYe7lAMVm5InAh1yuR3mMgwIA2IICAAQABgAIAAyDAgEYggIABAAGAAgADIMCAdiCAgAEAAYACAAMgwICGIICAAQABgAIAAyDAgJYggIABAAGAAgADIMCApiCAgAEAAYACAAMgwIAmIICAAQABgAIAAyDAgLYggIABAAGAAgADIMCBViCAgAEAAYACAAMgwIH2IICAAQABgAIAAyDAgTYggIABAAGAAgADIMCBJiCAgAEAAYACAAOhVodHRwczovL2l2eWR1YmFpLmNvbS9CWENoRUk4SWliMEFZUTRiSEUxWkh4ektyNkFSSXRBSkp2aGZadXl3c1lGc2ZBMERnbC1aZkVQSUZ5VkJzbGRnNERPRWRZS1ZoaDRPMWQ2UzVFVzk0ckRGOTh6DAgJYggIABAAGAAgAA&is_vtc=1&cid=CAQSsQEABaugfQ02lXkUg98S36HNQF09PyCh8sEJzRSF5tfsC2Rxvw5jfUmuwDGfu35tJlbRcSf3t17eMBNAdLTn8RU5n33OIb4HWIL_qLUSak80wSPsd3-sZc8OJcuXHWOP2IhcO9ex0NXplwOtDbay9Rz53tu-_nnnHT0mvW-oYkYeAj2d-sxgZ94LQznuNzYNSs2tfJt-nPwBVri8u2fkMpVVePQHdMDkNGkX6jwtiDqRCzw&eitems=ChEI8Iib0AYQ2-We-7fk_puDARIdAO-tjSFLFXxNIlFX44h62nVrdW8E6npF3NCyh3c&random=1737535581",
+          "https://c.clarity.ms/c.gif",
+          "https://c.bing.com/c.gif?ctsa=mr&CtsSyncId=327B08A8A8A74376889B6F5FD75924BC&RedC=c.clarity.ms&MXFR=05B4321A4A4D61BE1AE025404E4D6F0F"
+        ]
+      }
+    ],
+    "avgTtfb": 2544,
+    "avgResponseTime": 7718
+  },
+  "seo": {
+    "pages": [
+      {
+        "url": "https://ivydubai.com/",
+        "title": "IVY Beauty & Bubbles Dubai – #1 The Best Hair Salon in Dubai Top Rated In UAE!",
+        "metaDescription": null,
+        "h1Count": 0,
+        "canonicalUrl": "https://ivydubai.com/",
+        "issues": [
+          {
+            "rule": "title-too-long",
+            "severity": "warning",
+            "message": "Title is too long (78 chars). Search engines truncate after ~60 chars.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "meta-description-missing",
+            "severity": "warning",
+            "message": "Page is missing a meta description.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "h1-missing",
+            "severity": "error",
+            "message": "Page has no <h1> heading.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\" alt=\"\" title=\"IVY_FULL_COLOR\" width=\"888\" height=\"362\" data-op3-attachment-id=\"1692\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\" alt=\"\" title=\"IVY_FULL_COLOR\" width=\"512\" height=\"256\" data-op3-attachment-id=\"1692\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2025/05/599_HAIR_PACKAGE.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2025/05/599_HAIR_PACKAGE.webp\" alt=\"\" title=\"599_HAIR_PACKAGE\" width=\"1024\" height=\"476\" data-op3-attachment-id=\"3780\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2025/05/599_WEB_PRICE-3.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2025/05/599_WEB_PRICE-3.webp\" alt=\"\" title=\"599_WEB_PRICE-3\" width=\"800\" height=\"893\" data-op3-attachment-id=\"3779\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2022/09/ezgif.com-gif-maker.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2022/09/ezgif.com-gif-maker.webp\" alt=\"\" title=\"ezgif.com-gif-maker\" width=\"974\" height=\"69\" data-op3-attachment-id=\"3694\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2021/06/celebrate.png\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2021/06/celebrate.png\" alt=\"\" title=\"celebrate\" width=\"700\" height=\"198\" data-op3-attachment-id=\"1971\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2024/03/insta_follow-300x178-1.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2024/03/insta_follow-300x178-1.webp\" alt=\"\" title=\"insta_follow-300x178\" width=\"300\" height=\"178\" data-op3-attachment-id=\"3764\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2022/07/versum_reviews-300x178.jpg\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2022/07/versum_reviews-300x178.jpg\" alt=\"\" title=\"versum_reviews\" width=\"300\" height=\"178\" data-op3-attachment-id=\"3574\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2022/07/facebook_likes-300x178.jpg\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2022/07/facebook_likes-300x178.jpg\" alt=\"\" title=\"facebook_likes\" width=\"300\" height=\"178\" data-op3-attachment-id=\"3577\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2024/03/google-reviews-300x178_doha-3.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2024/03/google-reviews-300x178_doha-3.webp\" alt=\"\" title=\"google-reviews-300x178_doha-3\" width=\"300\" height=\"178\" data-op3-attachment-id=\"3763\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2022/09/BRIGHT_WIDE_NOTXT_new-2.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2022/09/BRIGHT_WIDE_NOTXT_new-2.webp\" alt=\"\" title=\"BRIGHT_WIDE_NOTXT_new-2\" width=\"960\" height=\"540\" data-op3-attachment-id=\"3693\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2022/09/Zrzut-ekranu-2021-06-16-o-11.53.39-PM-1024x452-2.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2022/09/Zrzut-ekranu-2021-06-16-o-11.53.39-PM-1024x452-2.webp\" alt=\"\" title=\"Zrzut-ekranu-2021-06-16-o-11.53.39-PM-1024x452-2\" width=\"1024\" height=\"452\" data-op3-attachment-id=\"3696\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2022/09/DARK_WIDE_NOTXT_new.jpg\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2022/09/DARK_WIDE_NOTXT_new.jpg\" alt=\"\" title=\"DARK_WIDE_NOTXT_new\" width=\"960\" height=\"540\" data-op3-attachment-id=\"3678\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2021/06/Zrzut-ekranu-2021-06-17-o-12.05.26-AM-1024x328.png\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2021/06/Zrzut-ekranu-2021-06-17-o-12.05.26-AM-1024x328.png\" alt=\"\" title=\"Zrzut ekranu 2021-06-17 o 12.05.26 AM\" width=\"1024\" height=\"328\" data-op3-attachment-id=\"1836\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2021/06/follow.png\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2021/06/follow.png\" alt=\"\" title=\"follow\" width=\"700\" height=\"198\" data-op3-attachment-id=\"1976\" loading=\"lazy\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2024/03/mapa_ivy_2024_POINT-1024x1024.webp\".",
+            "url": "https://ivydubai.com/",
+            "element": "<img class=\"\" src=\"https://ivydubai.com/wp-content/uploads/2024/03/mapa_ivy_2024_POINT-1024x1024.webp\" alt=\"\" title=\"mapa_ivy_2024_POINT\" width=\"1024\" height=\"1024\" data-op3-attachment-id=\"3757\" loading=\"lazy\">"
+          },
+          {
+            "rule": "og-image-missing",
+            "severity": "warning",
+            "message": "Page is missing an og:image meta tag. Social shares will lack a preview image.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "structured-data-missing",
+            "severity": "info",
+            "message": "Page has no JSON-LD structured data. Adding schema markup can improve rich results.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "twitter-card-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:card meta tag.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "twitter-image-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:image meta tag.",
+            "url": "https://ivydubai.com/"
+          },
+          {
+            "rule": "mixed-content",
+            "severity": "warning",
+            "message": "Page loads 1 resource(s) over insecure HTTP.",
+            "url": "https://ivydubai.com/"
+          }
+        ]
+      },
+      {
+        "url": "https://ivydubai.com/book-visit",
+        "title": "book visit – IVY Beauty & Bubbles Dubai",
+        "metaDescription": null,
+        "h1Count": 0,
+        "canonicalUrl": "https://ivydubai.com/book-visit/",
+        "issues": [
+          {
+            "rule": "meta-description-missing",
+            "severity": "warning",
+            "message": "Page is missing a meta description.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "h1-missing",
+            "severity": "error",
+            "message": "Page has no <h1> heading.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://bat.bing.com/action/0?ti=187004503&tm=gtm002&Ver=2&mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&bo=1&sid=88632800504611f1a0ba372e43c7c82e&vid=88633880504611f1b352038ff7762625&vids=1&msclkid=N&gtm_tag_source=1&uach=pv%3D19.0.0&pi=0&lg=en-GB&sw=1280&sh=720&sc=24&nwd=1&tl=book%20visit%20%E2%80%93%20IVY%20Beauty%20%26%20Bubbles%20Dubai&p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&r=&lt=2405&evt=pageLoad&sv=2&cdb=AQAQ&rn=925483\".",
+            "url": "https://ivydubai.com/book-visit",
+            "element": "<img id=\"batBeacon284820054773\" width=\"0\" height=\"0\" alt=\"\" src=\"https://bat.bing.com/action/0?ti=187004503&amp;tm=gtm002&amp;Ver=2&amp;mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&amp;bo=1&amp;sid=88632800504611f1a0ba372e43c7c82e&amp;vid=88633880504611f1b352038ff7762625&amp;vids=1&amp;msclkid=N&amp;gtm_tag_source=1&amp;uach=pv%3D19.0.0&amp;pi=0&amp;lg=en-GB&amp;sw=1280&amp;sh=720&amp;sc=24&amp;nwd=1&amp;tl=book%20visit%20%E2%80%93%20IVY%20Beauty%20%26%20Bubbles%20Dubai&amp;p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&amp;r=&amp;lt=2405&amp;evt=pageLoad&amp;sv=2&amp;cdb=AQAQ&amp;rn=925483\" style=\"width: 0px; height: 0px; display: none; visibility: hidden;\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://bat.bing.com/action/0?ti=187004503&tm=gtm002&Ver=2&mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&bo=2&sid=88632800504611f1a0ba372e43c7c82e&vid=88633880504611f1b352038ff7762625&vids=0&msclkid=N&tpp=1&ea=view_item&en=Y&p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&sw=1280&sh=720&sc=24&nwd=1&evt=custom&cdb=AQAQ&rn=619977\".",
+            "url": "https://ivydubai.com/book-visit",
+            "element": "<img id=\"batBeacon938137176649\" width=\"0\" height=\"0\" alt=\"\" src=\"https://bat.bing.com/action/0?ti=187004503&amp;tm=gtm002&amp;Ver=2&amp;mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&amp;bo=2&amp;sid=88632800504611f1a0ba372e43c7c82e&amp;vid=88633880504611f1b352038ff7762625&amp;vids=0&amp;msclkid=N&amp;tpp=1&amp;ea=view_item&amp;en=Y&amp;p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&amp;sw=1280&amp;sh=720&amp;sc=24&amp;nwd=1&amp;evt=custom&amp;cdb=AQAQ&amp;rn=619977\" style=\"width: 0px; height: 0px; display: none; visibility: hidden;\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://bat.bing.com/action/0?ti=187004503&tm=gtm002&Ver=2&mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&bo=3&sid=88632800504611f1a0ba372e43c7c82e&vid=88633880504611f1b352038ff7762625&vids=0&msclkid=N&gtm_tag_source=awct&tpp=1&ea=673961872%2FiSKXCMjc5dsDEJCvr8EC&en=Y&p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&sw=1280&sh=720&sc=24&nwd=1&evt=custom&cdb=AQAQ&rn=969337\".",
+            "url": "https://ivydubai.com/book-visit",
+            "element": "<img id=\"batBeacon273668010948\" width=\"0\" height=\"0\" alt=\"\" src=\"https://bat.bing.com/action/0?ti=187004503&amp;tm=gtm002&amp;Ver=2&amp;mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&amp;bo=3&amp;sid=88632800504611f1a0ba372e43c7c82e&amp;vid=88633880504611f1b352038ff7762625&amp;vids=0&amp;msclkid=N&amp;gtm_tag_source=awct&amp;tpp=1&amp;ea=673961872%2FiSKXCMjc5dsDEJCvr8EC&amp;en=Y&amp;p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&amp;sw=1280&amp;sh=720&amp;sc=24&amp;nwd=1&amp;evt=custom&amp;cdb=AQAQ&amp;rn=969337\" style=\"width: 0px; height: 0px; display: none; visibility: hidden;\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://bat.bing.com/action/0?ti=187004503&tm=gtm002&Ver=2&mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&bo=4&sid=88632800504611f1a0ba372e43c7c82e&vid=88633880504611f1b352038ff7762625&vids=0&msclkid=N&tpp=1&ea=view_item&en=Y&p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&sw=1280&sh=720&sc=24&nwd=1&evt=custom&cdb=AQAQ&rn=280945\".",
+            "url": "https://ivydubai.com/book-visit",
+            "element": "<img id=\"batBeacon248288088702\" width=\"0\" height=\"0\" alt=\"\" src=\"https://bat.bing.com/action/0?ti=187004503&amp;tm=gtm002&amp;Ver=2&amp;mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&amp;bo=4&amp;sid=88632800504611f1a0ba372e43c7c82e&amp;vid=88633880504611f1b352038ff7762625&amp;vids=0&amp;msclkid=N&amp;tpp=1&amp;ea=view_item&amp;en=Y&amp;p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&amp;sw=1280&amp;sh=720&amp;sc=24&amp;nwd=1&amp;evt=custom&amp;cdb=AQAQ&amp;rn=280945\" style=\"width: 0px; height: 0px; display: none; visibility: hidden;\">"
+          },
+          {
+            "rule": "img-empty-alt",
+            "severity": "info",
+            "message": "Image has an empty alt attribute (OK if decorative): src=\"https://bat.bing.com/action/0?ti=187004503&tm=gtm002&Ver=2&mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&bo=5&sid=88632800504611f1a0ba372e43c7c82e&vid=88633880504611f1b352038ff7762625&vids=0&msclkid=N&gtm_tag_source=awct&tpp=1&ea=673961872%2FiSKXCMjc5dsDEJCvr8EC&en=Y&p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&sw=1280&sh=720&sc=24&nwd=1&evt=custom&cdb=AQAQ&rn=720301\".",
+            "url": "https://ivydubai.com/book-visit",
+            "element": "<img id=\"batBeacon103372923037\" width=\"0\" height=\"0\" alt=\"\" src=\"https://bat.bing.com/action/0?ti=187004503&amp;tm=gtm002&amp;Ver=2&amp;mid=b23e3aeb-b8a1-4a4b-9f3f-707b9f207ffc&amp;bo=5&amp;sid=88632800504611f1a0ba372e43c7c82e&amp;vid=88633880504611f1b352038ff7762625&amp;vids=0&amp;msclkid=N&amp;gtm_tag_source=awct&amp;tpp=1&amp;ea=673961872%2FiSKXCMjc5dsDEJCvr8EC&amp;en=Y&amp;p=https%3A%2F%2Fivydubai.com%2Fbook-visit%2F&amp;sw=1280&amp;sh=720&amp;sc=24&amp;nwd=1&amp;evt=custom&amp;cdb=AQAQ&amp;rn=720301\" style=\"width: 0px; height: 0px; display: none; visibility: hidden;\">"
+          },
+          {
+            "rule": "og-description-missing",
+            "severity": "info",
+            "message": "Page is missing an og:description meta tag.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "og-image-missing",
+            "severity": "warning",
+            "message": "Page is missing an og:image meta tag. Social shares will lack a preview image.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "structured-data-missing",
+            "severity": "info",
+            "message": "Page has no JSON-LD structured data. Adding schema markup can improve rich results.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "twitter-card-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:card meta tag.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "twitter-image-missing",
+            "severity": "info",
+            "message": "Page is missing a twitter:image meta tag.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "mixed-content",
+            "severity": "warning",
+            "message": "Page loads 1 resource(s) over insecure HTTP.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "thin-content",
+            "severity": "info",
+            "message": "Page has only 171 words. Thin content may rank poorly.",
+            "url": "https://ivydubai.com/book-visit"
+          },
+          {
+            "rule": "redirect-chain-long",
+            "severity": "warning",
+            "message": "Redirect chain has 7 hops. Keep chains under 3 to preserve link equity.",
+            "url": "https://ivydubai.com/book-visit"
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "error": 2,
+      "warning": 8,
+      "info": 29
+    }
+  },
+  "siteLevel": {
+    "issues": [
+      {
+        "rule": "security-hsts-missing",
+        "severity": "warning",
+        "message": "Missing Strict-Transport-Security header. Browsers won't enforce HTTPS.",
+        "url": "https://ivydubai.com"
+      },
+      {
+        "rule": "security-csp-missing",
+        "severity": "warning",
+        "message": "Missing Content-Security-Policy header. Site is more vulnerable to XSS.",
+        "url": "https://ivydubai.com"
+      },
+      {
+        "rule": "security-x-frame-missing",
+        "severity": "warning",
+        "message": "Missing X-Frame-Options header. Site may be vulnerable to clickjacking.",
+        "url": "https://ivydubai.com"
+      },
+      {
+        "rule": "security-x-content-type-missing",
+        "severity": "warning",
+        "message": "Missing X-Content-Type-Options header. Browsers may MIME-sniff responses.",
+        "url": "https://ivydubai.com"
+      }
+    ]
+  },
+  "externalLinks": {
+    "checked": 2,
+    "broken": 0,
+    "issues": []
+  },
+  "accessibility": {
+    "issues": [
+      {
+        "rule": "a11y-landmark-main-missing",
+        "severity": "warning",
+        "message": "Page has no <main> element or role=\"main\". Screen readers need landmarks.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "a11y-landmark-nav-missing",
+        "severity": "info",
+        "message": "Page has no <nav> element or role=\"navigation\".",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "a11y-skip-nav-missing",
+        "severity": "info",
+        "message": "Page has no skip navigation link. Keyboard users must tab through all nav items.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "a11y-landmark-main-missing",
+        "severity": "warning",
+        "message": "Page has no <main> element or role=\"main\". Screen readers need landmarks.",
+        "url": "https://ivydubai.com/book-visit"
+      },
+      {
+        "rule": "a11y-landmark-nav-missing",
+        "severity": "info",
+        "message": "Page has no <nav> element or role=\"navigation\".",
+        "url": "https://ivydubai.com/book-visit"
+      },
+      {
+        "rule": "a11y-skip-nav-missing",
+        "severity": "info",
+        "message": "Page has no skip navigation link. Keyboard users must tab through all nav items.",
+        "url": "https://ivydubai.com/book-visit"
+      }
+    ]
+  },
+  "crawlAnalysis": {
+    "issues": []
+  },
+  "resources": {
+    "issues": [
+      {
+        "rule": "resource-render-blocking",
+        "severity": "warning",
+        "message": "1 script(s) in <head> without async/defer are render-blocking: be.js",
+        "url": "https://ivydubai.com/book-visit"
+      },
+      {
+        "rule": "resource-excessive",
+        "severity": "info",
+        "message": "Page loads 41 external resources (39 scripts, 2 stylesheets).",
+        "url": "https://ivydubai.com/book-visit"
+      },
+      {
+        "rule": "resource-third-party-heavy",
+        "severity": "info",
+        "message": "Page loads resources from 15 third-party domains.",
+        "url": "https://ivydubai.com/book-visit"
+      }
+    ]
+  },
+  "contentAnalysis": {
+    "duplicateGroups": [],
+    "issues": []
+  },
+  "imageOptimization": {
+    "issues": [
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\" uses PNG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2021/06/celebrate.png\" uses PNG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2022/07/versum_reviews-300x178.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2022/07/facebook_likes-300x178.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2022/09/DARK_WIDE_NOTXT_new.jpg\" uses JPG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2021/06/Zrzut-ekranu-2021-06-17-o-12.05.26-AM-1024x328.png\" uses PNG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://ivydubai.com/wp-content/uploads/2021/06/follow.png\" uses PNG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/"
+      },
+      {
+        "rule": "img-format-not-optimal",
+        "severity": "info",
+        "message": "Image \"https://cdn-provesrc.nyc3.cdn.digitaloceanspaces.com/assets/google-review-icon.png\" uses PNG. Consider WebP or AVIF for smaller files.",
+        "url": "https://ivydubai.com/book-visit"
+      }
+    ]
+  },
+  "lighthouse": null,
+  "rankedFixes": [
+    {
+      "title": "Add missing H1 headings",
+      "description": "Page has no <h1> heading.",
+      "impact": "high",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 1,
+      "score": 9
+    },
+    {
+      "title": "Add meta descriptions",
+      "description": "Page is missing a meta description.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 2,
+      "score": 6
+    },
+    {
+      "title": "Add Open Graph image tags",
+      "description": "Page is missing an og:image meta tag. Social shares will lack a preview image.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 3,
+      "score": 6
+    },
+    {
+      "title": "Fix mixed HTTP/HTTPS content",
+      "description": "Page loads 1 resource(s) over insecure HTTP.",
+      "impact": "high",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 4,
+      "score": 6
+    },
+    {
+      "title": "Add Strict-Transport-Security header",
+      "description": "Missing Strict-Transport-Security header. Browsers won't enforce HTTPS.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com"
+      ],
+      "category": "security",
+      "rank": 5,
+      "score": 6
+    },
+    {
+      "title": "Add X-Frame-Options header",
+      "description": "Missing X-Frame-Options header. Site may be vulnerable to clickjacking.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com"
+      ],
+      "category": "security",
+      "rank": 6,
+      "score": 6
+    },
+    {
+      "title": "Add <main> landmark element",
+      "description": "Page has no <main> element or role=\"main\". Screen readers need landmarks.",
+      "impact": "medium",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "accessibility",
+      "rank": 7,
+      "score": 6
+    },
+    {
+      "title": "Defer render-blocking scripts",
+      "description": "1 script(s) in <head> without async/defer are render-blocking: be.js",
+      "impact": "high",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "performance",
+      "rank": 8,
+      "score": 6
+    },
+    {
+      "title": "Add JSON-LD structured data",
+      "description": "Page has no JSON-LD structured data. Adding schema markup can improve rich results.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 9,
+      "score": 4
+    },
+    {
+      "title": "Shorten redirect chains (>2 hops)",
+      "description": "Redirect chain has 7 hops. Keep chains under 3 to preserve link equity.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 10,
+      "score": 4
+    },
+    {
+      "title": "Add Content-Security-Policy header",
+      "description": "Missing Content-Security-Policy header. Site is more vulnerable to XSS.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com"
+      ],
+      "category": "security",
+      "rank": 11,
+      "score": 4
+    },
+    {
+      "title": "Reduce external resource count",
+      "description": "Page loads 41 external resources (39 scripts, 2 stylesheets).",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "performance",
+      "rank": 12,
+      "score": 4
+    },
+    {
+      "title": "Convert images to WebP/AVIF",
+      "description": "Image \"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\" uses PNG. Consider WebP or AVIF for smaller files.",
+      "impact": "medium",
+      "effort": "medium",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "images",
+      "rank": 13,
+      "score": 4
+    },
+    {
+      "title": "Shorten long page titles",
+      "description": "Title is too long (78 chars). Search engines truncate after ~60 chars.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/"
+      ],
+      "category": "seo",
+      "rank": 14,
+      "score": 3
+    },
+    {
+      "title": "Review empty alt attributes",
+      "description": "Image has an empty alt attribute (OK if decorative): src=\"https://ivydubai.com/wp-content/uploads/2021/06/IVY_FULL_COLOR.png\".",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "images",
+      "rank": 15,
+      "score": 3
+    },
+    {
+      "title": "Add Twitter Card meta tags",
+      "description": "Page is missing a twitter:card meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 16,
+      "score": 3
+    },
+    {
+      "title": "Add Twitter Card image tags",
+      "description": "Page is missing a twitter:image meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 17,
+      "score": 3
+    },
+    {
+      "title": "Add Open Graph description tags",
+      "description": "Page is missing an og:description meta tag.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 18,
+      "score": 3
+    },
+    {
+      "title": "Add X-Content-Type-Options header",
+      "description": "Missing X-Content-Type-Options header. Browsers may MIME-sniff responses.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com"
+      ],
+      "category": "security",
+      "rank": 19,
+      "score": 3
+    },
+    {
+      "title": "Add <nav> landmark element",
+      "description": "Page has no <nav> element or role=\"navigation\".",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "accessibility",
+      "rank": 20,
+      "score": 3
+    },
+    {
+      "title": "Add skip navigation link",
+      "description": "Page has no skip navigation link. Keyboard users must tab through all nav items.",
+      "impact": "low",
+      "effort": "low",
+      "affectedUrls": [
+        "https://ivydubai.com/",
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "accessibility",
+      "rank": 21,
+      "score": 3
+    },
+    {
+      "title": "Add more content to thin pages",
+      "description": "Page has only 171 words. Thin content may rank poorly.",
+      "impact": "medium",
+      "effort": "high",
+      "affectedUrls": [
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "seo",
+      "rank": 22,
+      "score": 2
+    },
+    {
+      "title": "Reduce third-party dependencies",
+      "description": "Page loads resources from 15 third-party domains.",
+      "impact": "medium",
+      "effort": "high",
+      "affectedUrls": [
+        "https://ivydubai.com/book-visit"
+      ],
+      "category": "performance",
+      "rank": 23,
+      "score": 2
+    }
+  ]
+}

@@ -37,6 +37,34 @@ export async function POST(req: NextRequest) {
       ? audit.redFlags.map((f: any) => `[${f.severity.toUpperCase()}] ${f.message} (${f.category})`).join('\n')
       : 'No critical issues detected.';
 
+    // Build conversion/structural context
+    const convCtx = audit.conversion?.raw;
+    const conversionCtx = convCtx ? `
+**Conversion Analysis:**
+- Call-to-Action buttons: ${convCtx.ctaCount || 0}
+- Trust signals found: ${convCtx.trustSignalCount || 0}
+- Social media links: ${convCtx.socialLinks || 0}
+- Contact info visible: ${convCtx.hasPhone || convCtx.hasEmail ? 'Yes' : 'No'}
+- Contact form: ${convCtx.formCount > 0 ? 'Yes (' + convCtx.formCount + ' forms)' : 'None'}
+- Pricing info: ${convCtx.hasPricing ? 'Present' : 'Not found'}
+- Favicon: ${convCtx.hasFavicon ? 'Present' : 'Missing'}
+- CMS detected: ${convCtx.detectedCMS || 'Unknown'}
+- Stock photos: ${convCtx.hasStockPhotos ? 'Yes' : 'No'}
+- Placeholder/lorem text: ${convCtx.hasPlaceholderText ? 'YES — found on site' : 'None'}
+` : '';
+
+    // Design breakdown
+    const designCtx = audit.design ? `
+**Design Score Breakdown:**
+- Typography: ${audit.design.typography}/100
+- Color scheme: ${audit.design.color}/100
+- Spacing: ${audit.design.spacing}/100
+- Layout: ${audit.design.layout}/100
+- Interaction/animations: ${audit.design.interaction}/100
+- Consistency: ${audit.design.consistency}/100
+- Polish: ${audit.design.polish}/100
+` : '';
+
     const webVitals = audit.webVitals?.mobile || audit.webVitals?.desktop;
     const cwvStatus = webVitals
       ? `LCP: ${(webVitals.lcp / 1000).toFixed(1)}s, CLS: ${webVitals.cls.toFixed(3)}, INP: ${webVitals.inp}ms`
@@ -104,23 +132,59 @@ ${redFlagsContext || 'None — site is in good shape.'}
 
 ---
 
+## Visual Analysis (use the full-page desktop screenshot provided):
+
+Look at the website screenshot CAREFULLY and evaluate:
+
+1. **Visual Design Quality (1-10):**
+   - Is the design modern or outdated? Professional or DIY?
+   - Does it look like a custom-built site or a generic template?
+   - Are colors, fonts, and style consistent?
+   - Is there a clear visual hierarchy (headings → sections → CTAs)?
+
+2. **Content & Copy Quality (1-10):**
+   - Is the value proposition clear within 3 seconds?
+   - Are headings descriptive and benefit-driven?
+   - Is the text well-written or generic/filler?
+   - Any placeholder text, lorem ipsum, or under construction signs?
+
+3. **Mobile Readiness (from what you can see):**
+   - Does the layout work at smaller viewports?
+   - Are buttons appropriately sized?
+   - Is text readable?
+
+4. **Conversion Design (Present/Not Present):**
+   - Are there clear Call-to-Action buttons?
+   - Trust signals visible (testimonials, reviews, certifications, logos)?
+   - Contact info easy to find?
+   - Is there social proof (social media follow counts, client counts)?
+   - Does the site make you want to take action?
+
+5. **Specific Red Flags:**
+   - Stock photos that look generic
+   - Broken images or missing content
+   - Too much text without structure
+   - Slow-feeling design (heavy images, too many animations)
+   - Outdated design patterns (gradients from 2010, skeuomorphism)
+   - Missing or weak calls-to-action
+
 ## Your Task:
 
-Analyze the data above and provide:
+Analyze ALL of the above (technical data + screenshots) and provide:
 
-1. **Executive Summary** (2 sentences): Objective assessment of the business's digital presence. If the site is well-optimized, acknowledge strengths first.
+1. **Executive Summary** (2-3 sentences): Objective assessment of the business's digital presence. Include both technical health AND visual/design quality observations. Be specific, not generic.
 
-2. **Risk Factors** (3-5 items): Specific technical or business vulnerabilities that could cost them money/customers. Reference actual numbers (e.g., "47 broken links = lost SEO equity").
+2. **Risk Factors** (3-5 items): Specific technical OR visual business vulnerabilities that could cost them money/customers. Mix technical issues (e.g., "47 broken links = lost SEO equity") with design issues (e.g., "generic stock photography makes the site feel unprofessional").
 
-3. **Value Gaps** (3-5 items): Where they're losing revenue, traffic, or conversions compared to a fully optimized site. Quantify where possible (e.g., "LCP of 3.2s likely costs ~18% of mobile conversions").
+3. **Value Gaps** (3-5 items): Where they're losing revenue, traffic, or conversions. Include both technical (e.g., "LCP of 3.2s likely costs ~18% of mobile conversions") and design-related losses (e.g., "Weak CTA placement means visitors don't know how to book").
 
-4. **Sales Hooks** (3-5 items): Personalized, data-backed opening lines for cold outreach. Make them specific to this business's actual audit results. Write as complete sentences the sales rep can copy-paste.
+4. **Sales Hooks** (3-5 items): Personalized, data-backed opening lines for cold outreach. Reference SPECIFIC things you saw in the screenshot + audit data. Make them sound like a human sales rep who actually visited the site, not a generic template.
 
-5. **Competitive Position**: One sentence on how this site compares to industry benchmarks (e.g., "Below average for local service sites" or "Competitive with market leaders").
+5. **Competitive Position** (1-2 sentences): How this site compares to industry standards. Be specific about what's above/below average.
 
-6. **Recommended Services**: Based on the audit, which services would you actually sell? (e.g., "Performance Optimization", "SEO Overhaul", "Accessibility Compliance", "Security Hardening", "Full Redesign").
+6. **Recommended Services** (3-5 items): Based on BOTH technical issues and visual observations, what would you actually sell? (e.g., "Performance Optimization", "SEO Overhaul", "UI Redesign", "Content Rewrite", "Conversion Optimization", "Accessibility Compliance").
 
-7. **Priority**: low / medium / high — based on urgency and revenue impact.
+7. **Priority**: low / medium / high — based on overall urgency.
 
 Output ONLY valid JSON:
 {
