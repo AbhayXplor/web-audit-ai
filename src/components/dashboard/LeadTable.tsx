@@ -95,15 +95,57 @@ export default function LeadTable(
           throw new Error(enrichData.error || enrichData.details || 'Enrichment failed');
         }
 
+        const rawEnrichment = enrichData.enrichment || enrichData;
+        const transformedEnrichment = {
+          ...rawEnrichment,
+          riskFactors: [
+            ...(rawEnrichment.criticalIssues || []),
+            ...(rawEnrichment.weaknesses || [])
+          ].slice(0, 5),
+          valueGaps: rawEnrichment.quickWins ? rawEnrichment.quickWins.slice(0, 4) : [],
+          salesHooks: rawEnrichment.suggestedCopyEdits || [],
+          recommendedServices: deriveRecommendedServices(rawEnrichment.quickWins || []),
+          competitivePosition: deriveCompetitivePosition(rawEnrichment.strengths || []),
+          priority: rawEnrichment.criticalIssues?.length ? 'high' : 
+                   rawEnrichment.weaknesses?.length ? 'medium' : 'low'
+        };
+
         onUpdateLead(lead.id, {
           status: 'enriched',
-          enrichment: enrichData.enrichment || enrichData
+          enrichment: transformedEnrichment
         });
       } catch (err: unknown) {
         const error = err instanceof Error ? err.message : String(err ?? 'Unknown error');
         console.error('Enrichment error:', err);
-        alert(`Enrichment failed: ${error}. The lead is already audited — you can try again.`);
-        onUpdateLead(lead.id, { status: 'audited' });
+        
+        const fallbackEnrichment = {
+          summary: lead.audit?.overallScore 
+            ? `Audit complete with score ${lead.audit.overallScore}/100. AI enrichment pending.` 
+            : 'Enrichment temporarily unavailable.',
+          strengths: [],
+          weaknesses: [],
+          criticalIssues: [],
+          quickWins: [],
+          suggestedCopyEdits: [],
+          designScore: 50,
+          uxScore: 50,
+          conversionScore: 50,
+          trustScore: 50,
+          overallScore: lead.audit?.overallScore ?? 50,
+          timestamp: Date.now(),
+          riskFactors: ['AI enrichment unavailable — retry or check API status'],
+          valueGaps: [],
+          salesHooks: [],
+          recommendedServices: ['Technical Audit', 'Performance Optimization'],
+          competitivePosition: 'Pending AI analysis.',
+          priority: 'medium' as const
+        };
+        
+        onUpdateLead(lead.id, { 
+          status: 'enriched', 
+          enrichment: fallbackEnrichment 
+        });
+        alert(`Enrichment failed, using fallback data: ${error}`);
       }
     }
   };
@@ -282,4 +324,49 @@ function Cross({ className }: { className?: string }) {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
     </svg>
   );
+}
+
+function deriveRecommendedServices(quickWins: string[]): string[] {
+  const services: string[] = [];
+  const lowerWins = quickWins.join(' ').toLowerCase();
+  
+  if (lowerWins.includes('seo') || lowerWins.includes('meta') || lowerWins.includes('title')) {
+    services.push('SEO Optimization');
+  }
+  if (lowerWins.includes('speed') || lowerWins.includes('lcp') || lowerWins.includes('loading')) {
+    services.push('Page Speed Optimization');
+  }
+  if (lowerWins.includes('mobile') || lowerWins.includes('responsive') || lowerWins.includes('cta')) {
+    services.push('Mobile CRO');
+  }
+  if (lowerWins.includes('content') || lowerWins.includes('copy') || lowerWins.includes('headline')) {
+    services.push('Content Strategy');
+  }
+  if (lowerWins.includes('trust') || lowerWins.includes('review') || lowerWins.includes('testimonial')) {
+    services.push('Trust Signal Implementation');
+  }
+  if (lowerWins.includes('link') || lowerWins.includes('broken')) {
+    services.push('Technical SEO Audit');
+  }
+  if (services.length === 0 && quickWins.length > 0) {
+    services.push('Website Redesign', 'Performance Audit', 'Conversion Optimization');
+  }
+  
+  return services.slice(0, 4);
+}
+
+function deriveCompetitivePosition(strengths: string[]): string {
+  if (strengths.length === 0) return 'Position unclear — needs analysis.';
+  
+  const strongPoints = strengths.slice(0, 2).join(' ').toLowerCase();
+  if (strongPoints.includes('fast') || strongPoints.includes('performance')) {
+    return 'Site loads quickly, giving advantage over slower competitors.';
+  }
+  if (strongPoints.includes('mobile') || strongPoints.includes('responsive')) {
+    return 'Mobile experience is solid — can leverage this against non-mobile competitors.';
+  }
+  if (strongPoints.includes('seo') || strongPoints.includes('content')) {
+    return 'Content quality helps with search visibility — opportunity to outrank competitors.';
+  }
+  return 'Site has notable strengths but significant gaps remain to compete effectively.';
 }
