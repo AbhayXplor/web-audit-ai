@@ -12,6 +12,86 @@ console.log(`[ENRICH] Using model: ${MODEL_ID}`);
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
 
+function extractContext(lead: any, audit: any) {
+  const redFlagsContext = audit.redFlags?.length
+    ? audit.redFlags.map((f: any) => `[${f.severity.toUpperCase()}] ${f.message} (${f.category})`).join('\n')
+    : 'None detected.';
+
+  const c = audit.conversion?.raw || {};
+  const design = audit.design || {};
+
+  return {
+    name: lead.name,
+    website: lead.website,
+    industry: lead.category || 'Unknown',
+    rating: lead.rating ?? 0,
+    reviews: lead.reviews ?? 0,
+    address: lead.address || 'Not specified',
+    overall: audit.overallScore ?? 0,
+    perf: audit.performanceScore ?? 0,
+    seo: audit.seoScore ?? 0,
+    a11y: audit.accessibilityScore ?? 0,
+    security: audit.securityScore ?? 0,
+    designScore: audit.designScore ?? 0,
+    lcp: audit.webVitals?.mobile?.lcp ? (audit.webVitals.mobile.lcp / 1000).toFixed(1) : 'N/A',
+    cls: audit.webVitals?.mobile?.cls?.toFixed(3) || 'N/A',
+    inp: audit.webVitals?.mobile?.inp
+      ? `${audit.webVitals.mobile.inp}ms`
+      : 'N/A',
+    fcp: audit.webVitals?.mobile?.fcp
+      ? `${(audit.webVitals.mobile.fcp / 1000).toFixed(1)}s`
+      : 'N/A',
+    ttfb: audit.webVitals?.mobile?.ttfb
+      ? `${audit.webVitals.mobile.ttfb}ms`
+      : 'N/A',
+    title: audit.seo?.title?.present
+      ? `"${audit.seo.title.value}" (${audit.seo.title.length} chars)`
+      : 'MISSING',
+    meta: audit.seo?.metaDescription?.present
+      ? `"${audit.seo.metaDescription.value}"`
+      : 'MISSING',
+    h1Count: audit.seo?.h1?.count ?? 0,
+    canonical: audit.seo?.canonical?.present ? 'Present' : 'Missing',
+    og: audit.seo?.openGraph?.present ? 'Present' : 'Missing',
+    structuredData: audit.seo?.structuredData?.present
+      ? `Type: ${audit.seo.structuredData.type || 'unknown'}`
+      : 'None detected',
+    sitemap: audit.seo?.sitemap?.present ? 'Present' : 'Missing',
+    robots: audit.seo?.robotsTxt?.present ? 'Present' : 'Missing',
+    dupTitle: audit.seo?.duplicateTitle ? 'YES' : 'None',
+    dupDesc: audit.seo?.duplicateDescription ? 'YES' : 'None',
+    internalLinks: audit.links?.totalInternal ?? 0,
+    brokenInternal: audit.links?.brokenInternal ?? 0,
+    brokenExternal: audit.links?.brokenExternal ?? 0,
+    redirectChains: audit.links?.redirectChains?.length ?? 0,
+    orphans: audit.links?.orphanPages?.length ?? 0,
+    dTypography: design.typography ?? 65,
+    dColor: design.color ?? 65,
+    dSpacing: design.spacing ?? 65,
+    dLayout: design.layout ?? 70,
+    dInteraction: design.interaction ?? 60,
+    dConsistency: design.consistency ?? 70,
+    dPolish: design.polish ?? 55,
+    a11yTotal: audit.accessibility?.violations?.length ?? 0,
+    a11yCritical: audit.accessibility?.violations?.filter((v: any) => v.impact === 'critical').length ?? 0,
+    hsts: audit.security?.hsts?.present ? 'Present' : 'MISSING',
+    csp: audit.security?.csp?.present ? 'Present' : 'MISSING',
+    xfo: audit.security?.xFrameOptions?.present ? 'Present' : 'MISSING',
+    pagesCrawled: audit.pagesCrawled ?? 0,
+    redFlags: redFlagsContext,
+    ctaCount: c.ctaCount ?? 0,
+    trustSignals: c.trustSignalCount ?? 0,
+    socialLinks: c.socialLinks ?? 0,
+    contact: c.hasPhone || c.hasEmail ? 'Yes' : 'None',
+    forms: c.formCount > 0 ? `Yes (${c.formCount})` : 'None',
+    pricing: c.hasPricing ? 'Present' : 'Not found',
+    favicon: c.hasFavicon ? 'Present' : 'Missing',
+    cms: c.detectedCMS || 'Unknown',
+    stockPhotos: c.hasStockPhotos ? 'Yes' : 'No',
+    placeholder: c.hasPlaceholderText ? 'YES — live text' : 'None',
+  };
+}
+
 export async function POST(req: NextRequest) {
   const requestId = Math.random().toString(36).substring(2, 8);
   console.log(`[ENRICH:${requestId}] Starting enrichment request`);
@@ -32,171 +112,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing lead or audit data' }, { status: 400 });
     }
 
-    // Build rich context from comprehensive audit
-    const redFlagsContext = audit.redFlags?.length
-      ? audit.redFlags.map((f: any) => `[${f.severity.toUpperCase()}] ${f.message} (${f.category})`).join('\n')
-      : 'No critical issues detected.';
+    const ctx = extractContext(lead, audit);
 
-    // Build conversion/structural context
-    const convCtx = audit.conversion?.raw;
-    const conversionCtx = convCtx ? `
-**Conversion Analysis:**
-- Call-to-Action buttons: ${convCtx.ctaCount || 0}
-- Trust signals found: ${convCtx.trustSignalCount || 0}
-- Social media links: ${convCtx.socialLinks || 0}
-- Contact info visible: ${convCtx.hasPhone || convCtx.hasEmail ? 'Yes' : 'No'}
-- Contact form: ${convCtx.formCount > 0 ? 'Yes (' + convCtx.formCount + ' forms)' : 'None'}
-- Pricing info: ${convCtx.hasPricing ? 'Present' : 'Not found'}
-- Favicon: ${convCtx.hasFavicon ? 'Present' : 'Missing'}
-- CMS detected: ${convCtx.detectedCMS || 'Unknown'}
-- Stock photos: ${convCtx.hasStockPhotos ? 'Yes' : 'No'}
-- Placeholder/lorem text: ${convCtx.hasPlaceholderText ? 'YES — found on site' : 'None'}
-` : '';
-
-    // Design breakdown
-    const designCtx = audit.design ? `
-**Design Score Breakdown:**
-- Typography: ${audit.design.typography}/100
-- Color scheme: ${audit.design.color}/100
-- Spacing: ${audit.design.spacing}/100
-- Layout: ${audit.design.layout}/100
-- Interaction/animations: ${audit.design.interaction}/100
-- Consistency: ${audit.design.consistency}/100
-- Polish: ${audit.design.polish}/100
-` : '';
-
-    const webVitals = audit.webVitals?.mobile || audit.webVitals?.desktop;
-    const cwvStatus = webVitals
-      ? `LCP: ${(webVitals.lcp / 1000).toFixed(1)}s, CLS: ${webVitals.cls.toFixed(3)}, INP: ${webVitals.inp}ms`
-      : 'Not available';
-
-    const prompt = `
-You are an elite Sales Intelligence Agent for a web development agency.
-
-## Business Context
-- Business: ${lead.name}
-- Website: ${lead.website}
-- Industry: ${lead.category || 'Unknown'}
-- Rating: ${lead.rating}/5 (${lead.reviews} reviews)
-- Location: ${lead.address || 'Not specified'}
-
-## Technical Audit Results (Comprehensive)
-**Overall Health Score: ${audit.overallScore}/100**
-  - Performance: ${audit.performanceScore}/100
-  - SEO: ${audit.seoScore}/100
-  - Accessibility: ${audit.accessibilityScore}/100
-  - Security: ${audit.securityScore}/100
-  - Design: ${audit.designScore}/100
-
-**Core Web Vitals (Mobile):**
-${cwvStatus}
-
-**SEO Analysis:**
-- Title: ${audit.seo.title.present ? `"${audit.seo.title.value}" (${audit.seo.title.length} chars)` : 'MISSING'}
-- Meta Description: ${audit.seo.metaDescription.present ? `"${audit.seo.metaDescription.value}"` : 'MISSING'}
-- H1 Tags: ${audit.seo.h1.count} found
-- Canonical: ${audit.seo.canonical.present ? 'Present' : 'Missing'}
-- Open Graph: ${audit.seo.openGraph.present ? 'Present' : 'Missing'}
-- Structured Data: ${audit.seo.structuredData.present ? `Type: ${audit.seo.structuredData.type}` : 'None detected'}
-- Sitemap.xml: ${audit.seo.sitemap.present ? 'Present' : 'Missing'}
-- Robots.txt: ${audit.seo.robotsTxt.present ? 'Present' : 'Missing'}
-- Duplicate Issues: ${audit.seo.duplicateTitle ? 'Duplicate titles found' : 'None'} | ${audit.seo.duplicateDescription ? 'Duplicate descriptions' : 'None'}
-
-**Link Health:**
-- Internal Links: ${audit.links.totalInternal}
-- Broken Internal: ${audit.links.brokenInternal}
-- Broken External: ${audit.links.brokenExternal}
-- Redirect Chains: ${audit.links.redirectChains.length}
-- Orphan Pages: ${audit.links.orphanPages.length}
-
-**Design Score Breakdown (0-100):**
-- Typography: ${audit.design.typography} | Color: ${audit.design.color} | Spacing: ${audit.design.spacing}
-- Layout: ${audit.design.layout} | Interaction: ${audit.design.interaction} | Consistency: ${audit.design.consistency} | Polish: ${audit.design.polish}
-
-**Accessibility Violations:**
-- Total violations: ${audit.accessibility.violations.length}
-- Critical: ${audit.accessibility.violations.filter((v: any) => v.impact === 'critical').length}
-- Missing lang attribute: ${!audit.accessibility.langAttribute ? 'YES' : 'No'}
-- Missing viewport meta: ${!audit.accessibility.viewportMeta ? 'YES' : 'No'}
-
-**Security Headers:**
-- HSTS: ${audit.security.hsts.present ? 'Present' : 'MISSING'} | CSP: ${audit.security.csp.present ? 'Present' : 'MISSING'}
-- X-Frame-Options: ${audit.security.xFrameOptions.present ? 'Present' : 'MISSING'}
-
-**Pages Crawled:** ${audit.pagesCrawled}
-
----
-
-## Red Flags Detected:
-${redFlagsContext || 'None — site is in good shape.'}
-
----
-
-## Visual Analysis (use the full-page desktop screenshot provided):
-
-Look at the website screenshot CAREFULLY and evaluate:
-
-1. **Visual Design Quality (1-10):**
-   - Is the design modern or outdated? Professional or DIY?
-   - Does it look like a custom-built site or a generic template?
-   - Are colors, fonts, and style consistent?
-   - Is there a clear visual hierarchy (headings → sections → CTAs)?
-
-2. **Content & Copy Quality (1-10):**
-   - Is the value proposition clear within 3 seconds?
-   - Are headings descriptive and benefit-driven?
-   - Is the text well-written or generic/filler?
-   - Any placeholder text, lorem ipsum, or under construction signs?
-
-3. **Mobile Readiness (from what you can see):**
-   - Does the layout work at smaller viewports?
-   - Are buttons appropriately sized?
-   - Is text readable?
-
-4. **Conversion Design (Present/Not Present):**
-   - Are there clear Call-to-Action buttons?
-   - Trust signals visible (testimonials, reviews, certifications, logos)?
-   - Contact info easy to find?
-   - Is there social proof (social media follow counts, client counts)?
-   - Does the site make you want to take action?
-
-5. **Specific Red Flags:**
-   - Stock photos that look generic
-   - Broken images or missing content
-   - Too much text without structure
-   - Slow-feeling design (heavy images, too many animations)
-   - Outdated design patterns (gradients from 2010, skeuomorphism)
-   - Missing or weak calls-to-action
-
-## Your Task:
-
-Analyze ALL of the above (technical data + screenshots) and provide:
-
-1. **Executive Summary** (2-3 sentences): Objective assessment of the business's digital presence. Include both technical health AND visual/design quality observations. Be specific, not generic.
-
-2. **Risk Factors** (3-5 items): Specific technical OR visual business vulnerabilities that could cost them money/customers. Mix technical issues (e.g., "47 broken links = lost SEO equity") with design issues (e.g., "generic stock photography makes the site feel unprofessional").
-
-3. **Value Gaps** (3-5 items): Where they're losing revenue, traffic, or conversions. Include both technical (e.g., "LCP of 3.2s likely costs ~18% of mobile conversions") and design-related losses (e.g., "Weak CTA placement means visitors don't know how to book").
-
-4. **Sales Hooks** (3-5 items): Personalized, data-backed opening lines for cold outreach. Reference SPECIFIC things you saw in the screenshot + audit data. Make them sound like a human sales rep who actually visited the site, not a generic template.
-
-5. **Competitive Position** (1-2 sentences): How this site compares to industry standards. Be specific about what's above/below average.
-
-6. **Recommended Services** (3-5 items): Based on BOTH technical issues and visual observations, what would you actually sell? (e.g., "Performance Optimization", "SEO Overhaul", "UI Redesign", "Content Rewrite", "Conversion Optimization", "Accessibility Compliance").
-
-7. **Priority**: low / medium / high — based on overall urgency.
-
-Output ONLY valid JSON:
-{
-  "summary": "string",
-  "riskFactors": ["string"],
-  "valueGaps": ["string"],
-  "salesHooks": ["string"],
-  "competitivePosition": "string",
-  "recommendedServices": ["string"],
-  "priority": "low" | "medium" | "high"
-}
-`;
+    const prompt = buildPrompt(ctx);
 
     const parts: Part[] = [{ text: prompt }];
 
@@ -260,14 +178,24 @@ Output ONLY valid JSON:
       const jsonStr = text.substring(startIdx, endIdx + 1);
       const enrichment = JSON.parse(jsonStr);
 
-      // Add timestamp and ensure structure
-      const enrichedData = {
-        ...enrichment,
+      // Validate enriched required fields
+      const safeEnrichment = {
+        summary: enrichment.summary || 'Site audit completed. No AI summary available.',
+        strengths: Array.isArray(enrichment.strengths) ? enrichment.strengths : [],
+        weaknesses: Array.isArray(enrichment.weaknesses) ? enrichment.weaknesses : [],
+        criticalIssues: Array.isArray(enrichment.criticalIssues) ? enrichment.criticalIssues : [],
+        quickWins: Array.isArray(enrichment.quickWins) ? enrichment.quickWins : [],
+        suggestedCopyEdits: Array.isArray(enrichment.suggestedCopyEdits) ? enrichment.suggestedCopyEdits : [],
+        designScore: clampScore(enrichment.designScore),
+        uxScore: clampScore(enrichment.uxScore),
+        conversionScore: clampScore(enrichment.conversionScore),
+        trustScore: clampScore(enrichment.trustScore),
+        overallScore: clampScore(enrichment.overallScore),
         timestamp: Date.now()
       };
 
-      return NextResponse.json({ enrichment: enrichedData });
-    } catch (parseError) {
+      return NextResponse.json({ enrichment: safeEnrichment });
+    } catch (parseError: any) {
       console.error('Gemini JSON Parse Error:', parseError);
       console.error('Raw text from Gemini:', text);
       return NextResponse.json({
@@ -282,4 +210,130 @@ Output ONLY valid JSON:
       details: error.stack
     }, { status: 500 });
   }
+}
+
+function clampScore(v: any, min = 0, max = 100): number {
+  const n = Number(v);
+  return isNaN(n) ? 50 : Math.max(min, Math.min(max, Math.round(n)));
+}
+
+function buildPrompt(ctx: ReturnType<typeof extractContext>): string {
+  return `You are a senior web audit consultant with 15+ years of cross-functional experience in UX design, frontend architecture, conversion-rate optimization, and technical SEO. You are reviewing a live screenshot and a full technical audit report for a local business website.
+
+## Your Role
+Evaluate this site the way a real consultant would — with specificity, evidence-based reasoning, and no generic filler. Your scores must be internally consistent. If a site has major design issues (cluttered layout, broken hierarchy, generic stock photography), it cannot receive a 9/10 design score. If conversion signals are absent (no CTA, no contact info), conversion score must reflect that. If subscores suggest a weak site, overall must be weak as well.
+
+---
+
+## Data Provided
+
+### Business Context
+- Name: ${ctx.name}
+- Website: ${ctx.website}
+- Industry: ${ctx.industry}
+- Rating: ${ctx.rating}/5 (${ctx.reviews} reviews)
+- Location: ${ctx.address}
+
+### Technical Audit Scores (0–100)
+- Overall: ${ctx.overall}
+- Performance: ${ctx.perf} (LCP ${ctx.lcp}s, CLS ${ctx.cls}, INP ${ctx.inp})
+- SEO: ${ctx.seo}
+- Accessibility: ${ctx.a11y} (${ctx.a11yTotal} violations, ${ctx.a11yCritical} critical)
+- Security: ${ctx.security} (HSTS: ${ctx.hsts}, CSP: ${ctx.csp}, XFO: ${ctx.xfo})
+- Design: ${ctx.designScore}
+
+### Core Web Vitals
+LCP: ${ctx.lcp}s | CLS: ${ctx.cls} | INP: ${ctx.inp} | FCP: ${ctx.fcp} | TTFB: ${ctx.ttfb}
+
+### SEO Analysis
+- Title: ${ctx.title}
+- Meta Description: ${ctx.meta}
+- H1 Tags: ${ctx.h1Count} found
+- Canonical: ${ctx.canonical}
+- Open Graph: ${ctx.og}
+- Structured Data: ${ctx.structuredData}
+- Sitemap.xml: ${ctx.sitemap}
+- Robots.txt: ${ctx.robots}
+- Duplicate Titles: ${ctx.dupTitle} | Duplicate Descriptions: ${ctx.dupDesc}
+
+### Link Health
+- Internal Links: ${ctx.internalLinks}
+- Broken Internal: ${ctx.brokenInternal}
+- Broken External: ${ctx.brokenExternal}
+- Redirect Chains: ${ctx.redirectChains}
+- Orphan Pages: ${ctx.orphans}
+
+### Design Breakdown
+Typography: ${ctx.dTypography} | Color: ${ctx.dColor} | Spacing: ${ctx.dSpacing} | Layout: ${ctx.dLayout} | Interaction: ${ctx.dInteraction} | Consistency: ${ctx.dConsistency} | Polish: ${ctx.dPolish}
+
+### Pages Crawled: ${ctx.pagesCrawled}
+
+### Red Flags
+${ctx.redFlags}
+
+---
+
+## Conversion Analysis
+- CTAs: ${ctx.ctaCount} | Trust signals: ${ctx.trustSignals} | Social links: ${ctx.socialLinks}
+- Contact visible: ${ctx.contact} | Forms: ${ctx.forms} | Pricing: ${ctx.pricing}
+- Favicon: ${ctx.favicon} | CMS: ${ctx.cms} | Stock photos: ${ctx.stockPhotos} | Placeholder text: ${ctx.placeholder}
+
+---
+
+## Screenshots
+You will receive two full-page screenshots: desktop (1280px wide) and mobile (375px wide).
+
+---
+
+## Instructions
+
+1. **SCREENSHOT IS PRIMARY SOURCE.** Your visual evaluation takes priority over any single number. Pay attention to both desktop AND mobile screenshots — mobile tells a very different story for conversion.
+
+2. **BE CONCRETE AND SPECIFIC.** Name things you actually see: "hero image is a stock photo with no caption", "CTA is below the fold", "secondary nav has 12 items", "paragraphs are 31 words long on average with no headers".
+
+3. **SCORE HONESTLY.** A 75 is a solid B, not a barely-passing grade. A 90 is genuinely excellent across every dimension. Most small business sites score 45–65 after hard audit. Never inflate to help the user — honesty is more valuable than fluff.
+
+4. **SCORES MUST BE INTERNALLY CONSISTENT.**
+   - If design looks outdated or generic → designScore ≤ 65.
+   - If no CTAs visible in screenshot → conversionScore ≤ 40.
+   - If broken link count > 5 → weaknesses and quickWins must mention links.
+   - If 2 or more subscores are below 50 → overall cannot be above 65.
+   - Never mark something a Quick Win if it needs a full redesign.
+
+5. **NO GENERIC PHRASES.** Replace "could benefit from", "consider", or "may want to" with direct statements like "Missing typeface contrast makes body text hard to scan" or "Call-to-action is invisible on mobile — 90% of visitors never see it".
+
+6. **OUTPUT FORMAT — strict JSON, no markdown code fences:**
+
+{
+  "summary": "string",
+  "strengths": ["specific positive findings", "each must reference screenshot or audit data"],
+  "weaknesses": ["specific negative findings tied to the data"],
+  "criticalIssues": ["at most 3 items: genuinely urgent things damaging the business right now"],
+  "quickWins": ["at most 4 items: specific fixes requiring <=4 hours with meaningful impact"],
+  "suggestedCopyEdits": ["specific headline or CTA copy rewrites; omit entirely if copy is strong; empty array [] if no rewrites needed"],
+  "designScore": 0–100,
+  "uxScore": 0–100,
+  "conversionScore": 0–100,
+  "trustScore": 0–100,
+  "overallScore": 0–100
+}
+
+7. **SCORING DEFINITIONS:**
+
+- designScore: Typography hierarchy (font choices, size contrast, readability), color palette coherence and WCAG legibility, spacing rhythm and alignment consistency, layout balance across sections, mobile layout coherence, quality of images used, brand consistency between desktop and mobile views. Reference specific visual observations from screenshots.
+
+- uxScore: Ease of navigation (can a new user find what they want in ≤30 seconds?), information density and scanability, cognitive load, mobile touch target sizes and spacing, form/usability clarity, visual feedback on interactive states, accessibility surface from both automated scan and visible issues in screenshots.
+
+- conversionScore: Clarity of primary CTA and where it sits in above-fold real estate, presence and quality of trust signals (testimonials, credentials, guarantees), phone/email/contact form visibility, offer clarity and specificity, urgency or incentive messaging, social proof presence, lead-capture quality, friction in the funnel (do users need to guess what to do next?).
+
+- trustScore: Strength of brand identity (logo, imagery, voice quality), professionalism of layout and copy, transparency (physical address, clear About, privacy policy), review/testimonial availability and placement, HTTPS and security perception from the user view, consistency between what the site promises and what it shows.
+
+- overallScore: Weighted aggregate reflecting the site's real readiness today. If 2+ subscores are below 55, overall must also be below 55. If no critical red flags and subscores are 70+ range, an 80+ overall is defensible. Round to nearest integer.
+
+8. **FORBIDDEN PATTERNS (do not do these):**
+- Do not inflate scores to be reassuring — score the site honestly.
+- Do not repeat the same finding across 3 fields — be precise.
+- Do not use phrases like "would benefit from", "should consider", "may want to" — use direct statements.
+- Do not return barely-differentiated scores — if subscores differ by less than 5 points, justify why.
+- Do not output anything other than the JSON object — no markdown fences, no preface, no notes.`;
 }

@@ -2,7 +2,6 @@
 
 import React, { useState, useRef } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import Stats from '@/components/dashboard/Stats';
 import LeadTable from '@/components/dashboard/LeadTable';
 import LeadDetailDrawer from '@/components/dashboard/LeadDetailDrawer';
 import { useLeads } from '@/hooks/useLeads';
@@ -18,7 +17,7 @@ export default function Dashboard() {
   const [showManualForm, setShowManualForm] = useState(false);
   const [isBatchAuditing, setIsBatchAuditing] = useState(false);
   const [batchProgress, setBatchProgress] = useState(0);
-  const [batchId, setBatchId] = useState<string | null>(null);
+  const [auditMode, setAuditMode] = useState<'fast' | 'balanced' | 'deep'>('balanced');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [manualForm, setManualForm] = useState({
     name: '', website: '', rating: 5, reviews: 0, category: '', phone: '', address: ''
@@ -42,40 +41,36 @@ export default function Dashboard() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Batch audit failed');
 
-      setBatchId(data.batchId);
-
-      // Poll for progress
       const pollInterval = setInterval(async () => {
         const statusRes = await fetch(`/api/batch-audit?id=${data.batchId}`);
         const status = await statusRes.json();
         if (statusRes.ok) {
           setBatchProgress(status.progress);
 
-          // Update leads as they complete
-          status.leads.forEach((l: any, i: number) => {
+          status.leads.forEach((l: { status: string }, i: number) => {
             if (l.status === 'completed' && newLeads[i]) {
-              updateLead(newLeads[i].id, { status: 'audited' as const });
+              updateLead(newLeads[i].id, { status: 'audited' });
             }
           });
 
           if (status.status === 'completed' || status.status === 'failed') {
             clearInterval(pollInterval);
             setIsBatchAuditing(false);
-            const completed = status.leads.filter((l: any) => l.status === 'completed').length;
-            const failed = status.leads.filter((l: any) => l.status === 'failed').length;
+            const completed = status.leads.filter((l: { status: string }) => l.status === 'completed').length;
+            const failed = status.leads.filter((l: { status: string }) => l.status === 'failed').length;
             alert(`Batch audit complete: ${completed} succeeded, ${failed} failed`);
           }
         }
       }, 2000);
 
-      // Safety timeout — stop polling after 10 min
       setTimeout(() => {
         clearInterval(pollInterval);
         setIsBatchAuditing(false);
       }, 600000);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err.message : String(err ?? 'Unknown error');
       console.error('Batch audit error:', err);
-      alert(`Batch audit failed: ${err.message}`);
+      alert(`Batch audit failed: ${error}`);
       setIsBatchAuditing(false);
     }
   };
@@ -177,6 +172,26 @@ export default function Dashboard() {
               <Zap className="w-4 h-4" />
               {isBatchAuditing ? `Auditing ${batchProgress}%` : `Audit All (${leads.filter(l => l.status === 'new').length})`}
             </button>
+            {/* Audit Mode Toggle */}
+            <div className="p-1 rounded-xl flex items-center bg-white/5 border border-white/10">
+              {(['fast', 'balanced', 'deep'] as const).map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => setAuditMode(mode)}
+                  title={`${mode.charAt(0).toUpperCase() + mode.slice(1)} mode: ${
+                    mode === 'fast' ? '~90s, limited analysis' :
+                    mode === 'balanced' ? '~2-3 min, recommended' :
+                    '~6-10 min, comprehensive'
+                  }`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold capitalize transition-all ${auditMode === mode
+                    ? 'bg-brand-primary text-white shadow-lg'
+                    : 'text-slate-500 hover:text-slate-300'
+                    }`}
+                >
+                  {mode}
+                </button>
+              ))}
+            </div>
             <button
               onClick={handleDeleteAll}
               disabled={leads.length === 0}
@@ -202,8 +217,6 @@ export default function Dashboard() {
             </button>
           </div>
         </div>
-
-        <Stats leads={leads} onDeleteAll={handleDeleteAll} />
 
         {/* Manual Add Form (collapsed by default) */}
         {showManualForm && (
@@ -294,6 +307,7 @@ export default function Dashboard() {
           onUpdateLead={updateLead}
           onSelectLead={setSelectedLead}
           onDeleteLead={handleDeleteSingle}
+          auditMode={auditMode}
         />
       </main>
 

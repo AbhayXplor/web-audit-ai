@@ -1,5 +1,16 @@
 export type LeadStatus = 'new' | 'auditing' | 'audited' | 'enriching' | 'enriched' | 'failed';
 
+export type AuditMode = 'fast' | 'balanced' | 'deep';
+
+export interface AuditModeConfig {
+  maxPages: number;
+  depth: number;
+  lighthouseSamples: number;
+  screenshotWait: number; // in seconds
+  brokenLinksMax: number;
+  loadWaitUntil: 'domcontentloaded' | 'networkidle';
+}
+
 export interface CoreWebVitals {
   lcp: number; // Largest Contentful Paint in ms
   cls: number; // Cumulative Layout Shift

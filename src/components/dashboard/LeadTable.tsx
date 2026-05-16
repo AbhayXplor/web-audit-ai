@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { MoreHorizontal, Globe, Star, MapPin, CheckCircle2, Clock, Zap, ExternalLink, MousePointer2 } from 'lucide-react';
+import React from 'react';
+import { Globe, Star, MapPin, CheckCircle2, Clock, Zap, ExternalLink } from 'lucide-react';
 import { Lead } from '../../types';
 
 interface LeadTableProps {
@@ -9,10 +9,12 @@ interface LeadTableProps {
   onUpdateLead?: (id: string, updates: Partial<Lead>) => void;
   onSelectLead?: (lead: Lead) => void;
   onDeleteLead?: (id: string) => void;
+  auditMode?: 'fast' | 'balanced' | 'deep';
 }
 
-export default function LeadTable({ leads, onUpdateLead, onSelectLead, onDeleteLead }: LeadTableProps) {
-
+export default function LeadTable(
+  { leads, onUpdateLead, onSelectLead, onDeleteLead, auditMode = 'balanced' }: LeadTableProps
+) {
   const handleAction = async (lead: Lead) => {
     if (lead.status === 'enriched' && onSelectLead) {
       onSelectLead(lead);
@@ -25,50 +27,46 @@ export default function LeadTable({ leads, onUpdateLead, onSelectLead, onDeleteL
       // Run Audit
       try {
         onUpdateLead(lead.id, { status: 'auditing' });
+
         const auditRes = await fetch('/api/audit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             url: lead.website || `https://${lead.name.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
-            depth: 3,
-            maxPages: 30
+            mode: auditMode
           })
         });
 
         const responseData = await auditRes.json();
 
         if (!auditRes.ok) {
-          throw new Error(responseData.error || 'Audit failed');
+          throw new Error(responseData.error || responseData.details || 'Audit failed');
         }
 
         onUpdateLead(lead.id, {
           status: 'audited',
           audit: responseData.audit
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
+        const error = err instanceof Error ? err.message : String(err ?? 'Unknown error');
         console.error('Audit error:', err);
-        alert(`Audit failed: ${err.message}`);
+        alert(`Audit failed: ${error}. Lead state reset to New — please retry.`);
         onUpdateLead(lead.id, { status: 'new' });
       }
     } else if (lead.status === 'audited' || !lead.enrichment) {
       // Run Enrich
       try {
-        // Try enrichment without screenshots first to avoid payload issues
         onUpdateLead(lead.id, { status: 'enriching' });
 
         // Prune audit data to avoid payload limits
         const prunedAudit = lead.audit ? JSON.parse(JSON.stringify(lead.audit)) : null;
         if (prunedAudit) {
           delete prunedAudit.raw;
-          // Keep screenshots — Gemini Vision uses them for visual design & content analysis
-          // (Compress: keep only desktop full-page for visual analysis, remove mobile to save payload)
           delete prunedAudit.screenshotMobile;
-          // Also remove metadata fields
           delete prunedAudit._designMetrics;
           delete prunedAudit._conversion;
           delete prunedAudit._mobileChecks;
           delete prunedAudit._linkCheck;
-          // Slice large arrays just in case
           if (prunedAudit.links?.redirectChains) prunedAudit.links.redirectChains = prunedAudit.links.redirectChains.slice(0, 50);
           if (prunedAudit.links?.orphanPages) prunedAudit.links.orphanPages = prunedAudit.links.orphanPages.slice(0, 50);
           if (prunedAudit.accessibility?.violations) prunedAudit.accessibility.violations = prunedAudit.accessibility.violations.slice(0, 50);
@@ -101,9 +99,10 @@ export default function LeadTable({ leads, onUpdateLead, onSelectLead, onDeleteL
           status: 'enriched',
           enrichment: enrichData.enrichment || enrichData
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
+        const error = err instanceof Error ? err.message : String(err ?? 'Unknown error');
         console.error('Enrichment error:', err);
-        alert(`Enrichment failed: ${err.message}. The lead is already audited - you can try again.`);
+        alert(`Enrichment failed: ${error}. The lead is already audited — you can try again.`);
         onUpdateLead(lead.id, { status: 'audited' });
       }
     }
@@ -140,13 +139,12 @@ export default function LeadTable({ leads, onUpdateLead, onSelectLead, onDeleteL
                     <div className="flex flex-col">
                       <div className="flex items-center gap-2">
                         <div
-                          className="flex items-center gap-2 cursor-pointer group/name"
+                          className="flex items-center gap-2 cursor-pointer"
                           onClick={() => onSelectLead?.(lead)}
                         >
-                          <span className="font-bold text-slate-100 group-hover/name:text-brand-primary transition-all duration-300">
+                          <span className="font-bold text-slate-100 group-hover:text-brand-primary transition-all duration-300">
                             {lead.name}
                           </span>
-                          <MousePointer2 className="w-3 h-3 text-brand-primary opacity-0 group-hover/name:opacity-100 group-hover/name:translate-x-1 transition-all" />
                         </div>
                         {lead.website && (
                           <div className="flex items-center gap-1">
@@ -215,9 +213,7 @@ export default function LeadTable({ leads, onUpdateLead, onSelectLead, onDeleteL
                         className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-all opacity-0 group-hover:opacity-100"
                         title="Delete lead"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
+                        <Cross className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleAction(lead)}
@@ -278,4 +274,12 @@ function getScoreColor(score: number) {
   if (score >= 70) return 'bg-blue-500';
   if (score >= 50) return 'bg-amber-500';
   return 'bg-rose-500';
+}
+
+function Cross({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    </svg>
+  );
 }

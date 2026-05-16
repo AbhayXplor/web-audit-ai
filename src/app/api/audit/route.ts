@@ -3,6 +3,8 @@ import { exec, execFile } from 'child_process';
 import { promisify } from 'util';
 import { chromium, Browser } from 'playwright';
 import { resolve } from 'path';
+import { AuditMode } from '@/types';
+import { AUDIT_MODES } from '@/lib/audit-modes';
 
 const execAsync = promisify(exec);
 const execFileAsync = promisify(execFile);
@@ -15,44 +17,40 @@ export async function POST(req: NextRequest) {
   const requestId = Math.random().toString(36).substring(2, 8);
 
   try {
-    const { url, depth = 1, maxPages = 3, requestId: externalId } = await req.json();
+    const { url, mode = 'balanced', requestId: externalId } = await req.json();
+    const config = AUDIT_MODES[mode as AuditMode] || AUDIT_MODES.balanced;
     const id = externalId || requestId;
     if (!url) return NextResponse.json({ error: 'URL is required' }, { status: 400 });
 
     const normalizedUrl = url.startsWith('http') ? url : `https://${url}`;
-    console.log(`[AUDIT:${id}] Starting: ${normalizedUrl} (depth:${depth}, maxPages:${maxPages})`);
-    setProgress(id, 5, 'Crawling website', 'Running site-audit CLI...');
+    console.log(`[AUDIT:${id}] Starting: ${normalizedUrl} (mode:${mode})`);
+    setProgress(id, 5, 'Crawling website', `Running site-audit CLI with ${mode} settings...`);
 
     // === STEP 1: Run site-audit CLI ===
     let siteAudit: any = null;
     let siteAuditError: string | null = null;
 
-    try {
-      const binPath = resolve(process.cwd(), 'node_modules', '@benven', 'site-audit', 'dist', 'cli.js');
-      const { stdout } = await execFileAsync(process.execPath, [binPath, 'audit', normalizedUrl, '--json', '--depth', String(depth), '--max-pages', String(maxPages), '--no-robots', '--ci'], {
-        timeout: 240000,
-        maxBuffer: 50 * 1024 * 1024,
-        cwd: process.cwd()
-      });
-      siteAudit = JSON.parse(extractJson(stdout));
-      console.log(`[AUDIT:${id}] CLI succeeded. Pages: ${siteAudit.crawl?.totalPages || 0}`);
-    } catch (e1: any) {
-      console.log(`[AUDIT:${id}] Direct CLI failed: ${e1.message.substring(0, 100)}. Trying npx...`);
+    if (mode !== 'fast') {
       try {
-        const { stdout } = await execAsync(`npx --yes @benven/site-audit audit "${normalizedUrl}" --json --depth ${depth} --max-pages ${maxPages} --no-robots --ci`, {
-          timeout: 600000, maxBuffer: 50 * 1024 * 1024, cwd: process.cwd()  // 10 min for first-time npx download + crawl
-        });
+        const binPath = resolve(process.cwd(), 'node_modules', '@benven', 'site-audit', 'dist', 'cli.js');
+        const { stdout } = await execFileAsync(process.execPath, [binPath, 'audit', normalizedUrl, '--json', '--depth', String(config.depth), '--max-pages', String(config.maxPages), '--no-robots', '--ci'], { timeout: 240000, maxBuffer: 50 * 1024 * 1024, cwd: process.cwd() });
         siteAudit = JSON.parse(extractJson(stdout));
-        console.log(`[AUDIT:${id}] npx succeeded. Pages: ${siteAudit.crawl?.totalPages || 0}`);
-      } catch (e2: any) {
-        let recovered = false;
-        if (e2.stdout && typeof e2.stdout === 'string') {
-          try {
-            const jsonStr = extractJson(e2.stdout);
-            if (jsonStr && jsonStr.startsWith('{')) { siteAudit = JSON.parse(jsonStr); recovered = true; }
-          } catch { }
+      } catch (e1: any) {
+        console.log(`[AUDIT:${id}] Direct CLI failed: ${e1.message.substring(0, 100)}. Trying npx...`);
+        try {
+          const { stdout } = await execAsync(`npx --yes @benven/site-audit audit "${normalizedUrl}" --json --depth ${String(config.depth)} --max-pages ${String(config.maxPages)} --no-robots --ci`, { timeout: 600000, maxBuffer: 50 * 1024 * 1024, cwd: process.cwd() });
+          siteAudit = JSON.parse(extractJson(stdout));
+          console.log(`[AUDIT:${id}] npx succeeded. Pages: ${siteAudit.crawl?.totalPages || 0}`);
+        } catch (e2: any) {
+          let recovered = false;
+          if (e2.stdout && typeof e2.stdout === 'string') {
+            try {
+              const jsonStr = extractJson(e2.stdout);
+              if (jsonStr && jsonStr.startsWith('{')) { siteAudit = JSON.parse(jsonStr); recovered = true; }
+            } catch { }
+          }
+          if (!recovered) { siteAuditError = `site-audit failed: ${e1.message}`; }
         }
-        if (!recovered) { siteAuditError = `site-audit failed: ${e1.message}`; }
       }
     }
 
@@ -67,14 +65,14 @@ export async function POST(req: NextRequest) {
     setProgress(id, 40, 'Analyzing page', 'Launching browser...');
 
     try {
-      browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+      browser = await chromium.launch({ headless: true, args: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'] });
 
-      // Desktop — networkidle + 3s settle for full render
-      setProgress(id, 45, 'Analyzing page', 'Loading desktop view (networkidle + 3s settle)...');
+      // --- Desktop analysis ---
+      setProgress(id, 45, 'Analyzing page', `Loading desktop view (${config.loadWaitUntil} + ${config.screenshotWait}s settle)...`);
       const dp = await browser.newPage();
       await dp.setViewportSize({ width: 1280, height: 800 });
-      const pageResponse = await dp.goto(normalizedUrl, { waitUntil: 'networkidle', timeout: 45000 });
-      await dp.waitForTimeout(3000);
+      const pageResponse = await dp.goto(normalizedUrl, { waitUntil: config.loadWaitUntil, timeout: 45000 });
+      await dp.waitForTimeout(config.screenshotWait * 1000);
 
       extractedData = await dp.evaluate(() => {
         const title = document.title;
@@ -111,7 +109,8 @@ export async function POST(req: NextRequest) {
           isNextGen: !!(img.getAttribute('src') || '').match(/\.(webp|avif)(\?|$)/i),
           oversized: (img.clientWidth || 0) > 0 && (img.naturalWidth || 0) > (img.clientWidth || 0) * 2
         }));
-        const links = Array.from(document.querySelectorAll('a[href]')).map(a => a.getAttribute('href') || '').filter(h => h.startsWith('http') || h.startsWith('/') || h.startsWith('#') || h.startsWith('?')).slice(0, 100);
+        // Collect links (limit to 100), ignoring javascript/mailto/tel
+        const links = Array.from(document.querySelectorAll('a[href]')).map(a => a.getAttribute('href') || '').filter(h => h && !h.startsWith('javascript:') && !h.startsWith('mailto:') && !h.startsWith('tel:')).slice(0, 100);
         const pageText = document.body.innerText.toLowerCase();
         const htmlContent = document.documentElement.outerHTML.toLowerCase();
 
@@ -178,17 +177,21 @@ export async function POST(req: NextRequest) {
       allLinks = extractedData.allLinks || [];
       conversionData = extractedData.conversion || {};
 
-      // Take full-page screenshot for desktop (scroll + stitch)
-      const fullPageScreenshotDesktop = await dp.screenshot({ type: 'jpeg', quality: 50, fullPage: true });
-      screenshotDesktop = fullPageScreenshotDesktop.toString('base64');
+      // --- Desktop screenshot (individual try/catch) ---
+      try {
+        const shot = await dp.screenshot({ type: 'jpeg', quality: 50, fullPage: true });
+        screenshotDesktop = shot.toString('base64');
+      } catch (e) {
+        console.warn(`[AUDIT:${id}] Desktop screenshot failed:`, e);
+      }
       await dp.close();
 
-      // Mobile analysis — also with networkidle + settle
-      setProgress(id, 60, 'Mobile analysis', 'Checking mobile view (with full render)...');
+      // --- Mobile analysis ---
+      setProgress(id, 60, 'Mobile analysis', `Checking mobile view (${config.loadWaitUntil} + ${config.screenshotWait}s settle)...`);
       const mp = await browser.newPage();
       await mp.setViewportSize({ width: 375, height: 667 });
-      await mp.goto(normalizedUrl, { waitUntil: 'networkidle', timeout: 45000 });
-      await mp.waitForTimeout(3000);
+      await mp.goto(normalizedUrl, { waitUntil: config.loadWaitUntil, timeout: 45000 });
+      await mp.waitForTimeout(config.screenshotWait * 1000);
 
       mobileChecks = await mp.evaluate(() => {
         const viewportContent = document.querySelector('meta[name="viewport"]')?.getAttribute('content') || '';
@@ -210,36 +213,60 @@ export async function POST(req: NextRequest) {
         return { viewportContent, hasOverflow, docWidth: Math.round(docWidth), smallTargets, bodyFontSize, smallFonts, tapSpacingIssues: Math.min(spacingIssues, 20) };
       });
 
-      const fullPageScreenshotMobile = await mp.screenshot({ type: 'jpeg', quality: 50, fullPage: true });
-      screenshotMobile = fullPageScreenshotMobile.toString('base64');
+      // Mobile screenshot
+      try {
+        const shotM = await mp.screenshot({ type: 'jpeg', quality: 50, fullPage: true });
+        screenshotMobile = shotM.toString('base64');
+      } catch (eM) {
+        console.warn(`[AUDIT:${id}] Mobile screenshot failed:`, eM);
+      }
       await mp.close();
+
     } catch (e) {
       console.error(`[AUDIT:${id}] Browser analysis error:`, e);
     } finally {
-      if (browser) try { await browser.close(); } catch { }
+      if (browser) { try { await browser.close(); } catch { browser = null; } }
     }
 
     // === STEP 2B: Broken Link Checking ===
+    // Normalize links: strip trailing slashes, lowercase host, remove duplicates
+    const normalizeLink = (l: string): string => {
+      try {
+        const u = new URL(l);
+        u.pathname = u.pathname.replace(/\/+$/, '') || '/';
+        u.hostname = u.hostname.toLowerCase();
+        return u.toString();
+      } catch {
+        return l.toLowerCase().replace(/\/+$/, '');
+      }
+    };
+
     const linkResults = { total: 0, broken: 0, checked: 0, errors: [] as any[] };
     if (allLinks.length > 0) {
-      setProgress(id, 70, 'Checking links', `Testing ${allLinks.length} links...`);
-      const resolvedLinks = [...new Set(allLinks.map((l: string) => {
-        if (l.startsWith('http')) return l;
-        if (l.startsWith('/')) return new URL(l, normalizedUrl).href;
-        if (l.startsWith('#') || l.startsWith('?')) return null;
-        return new URL(l, normalizedUrl).href;
-      }).filter(Boolean))] as string[];
-      linkResults.total = resolvedLinks.length;
-      const toCheck = resolvedLinks.slice(0, 50);
+      setProgress(id, 70, 'Checking links', `Testing links with ${config.brokenLinksMax} max...`);
+      const uniqueLinks = [...new Set(allLinks
+        .filter(l => l.startsWith('http'))
+        .map(l => normalizeLink(l))
+      )];
+      linkResults.total = uniqueLinks.length;
+      const toCheck = uniqueLinks.slice(0, config.brokenLinksMax);
       for (const link of toCheck) {
         try {
           const ctrl = new AbortController();
           const to = setTimeout(() => ctrl.abort(), 5000);
           const res = await fetch(link, { method: 'HEAD', signal: ctrl.signal, redirect: 'manual' });
-          clearTimeout(to); linkResults.checked++;
-          if (res.status >= 400 || res.status === 0) { linkResults.broken++; linkResults.errors.push({ url: link.substring(0, 80), status: res.status }); }
-        } catch { linkResults.checked++; linkResults.broken++; linkResults.errors.push({ url: link.substring(0, 80), status: 0 }); }
-        if (linkResults.errors.length >= 20) break;
+          clearTimeout(to);
+          linkResults.checked++;
+          if (res.status >= 400 || res.status === 0) {
+            linkResults.broken++;
+            linkResults.errors.push({ url: link.substring(0, 80), status: res.status });
+          }
+        } catch {
+          linkResults.checked++;
+          linkResults.broken++;
+          linkResults.errors.push({ url: link.substring(0, 80), status: 0 });
+        }
+        if (linkResults.errors.length >= config.brokenLinksMax) break;
       }
     }
 
@@ -250,7 +277,8 @@ export async function POST(req: NextRequest) {
       const ctrl = new AbortController();
       const to = setTimeout(() => ctrl.abort(), 6000);
       const r = await fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(normalizedUrl)}&strategy=mobile`, { signal: ctrl.signal });
-      clearTimeout(to); if (r.ok) psiData = await r.json();
+      clearTimeout(to);
+      if (r.ok) psiData = await r.json();
     } catch { }
 
     // === STEP 4: Compute scores ===
@@ -277,6 +305,7 @@ export async function POST(req: NextRequest) {
     audit._designMetrics = designMetrics;
     audit._mobileChecks = mobileChecks;
     audit._linkCheck = linkResults;
+    audit._auditMode = mode;
 
     setProgress(id, 100, 'Complete', 'Audit finished');
     return NextResponse.json({ audit });
@@ -444,8 +473,6 @@ function buildAudit(siteAudit: any, opts: {
     const severity = fix.impact === 'high' ? 'critical' : fix.impact === 'medium' ? 'high' : 'medium';
     if (severity === 'critical' || severity === 'high') redFlags.push({ severity, category: fix.category, message: fix.title, impact: fix.description, affectedUrls: fix.affectedUrls?.slice(0, 5) || [] });
   }
-
-  // Technical red flags
   if (lcp > 4000) redFlags.unshift({ severity: 'critical', category: 'performance', message: `LCP ${(lcp / 1000).toFixed(1)}s — extremely slow`, impact: 'High bounce rate, Google ranking penalty' });
   const finalBrokenInternal = opts.linkResults?.broken ?? brokenInternal;
   if (finalBrokenInternal > 20) redFlags.unshift({ severity: 'critical', category: 'links', message: `${finalBrokenInternal} broken links found`, impact: 'Lost SEO equity, users hitting 404 pages' });
@@ -458,17 +485,14 @@ function buildAudit(siteAudit: any, opts: {
   if (!structuredDataPresent) redFlags.push({ severity: 'high', category: 'seo', message: 'No structured data (schema.org)', impact: 'No rich snippets in search results' });
   if (duplicateTitle) redFlags.push({ severity: 'high', category: 'seo', message: 'Duplicate page titles', impact: 'Keyword cannibalization in search' });
   if (a11yScore < 70) redFlags.push({ severity: 'high', category: 'accessibility', message: `Accessibility score ${a11yScore}/100`, impact: 'ADA compliance risk, excludes users' });
-  // Mobile red flags
   if (opts.mobileChecks?.smallTargets > 5) redFlags.push({ severity: 'high', category: 'accessibility', message: `${opts.mobileChecks.smallTargets} touch targets too small (<48px)`, impact: 'Poor mobile UX, users miss taps' });
   if (opts.mobileChecks?.hasOverflow) redFlags.push({ severity: 'high', category: 'design', message: 'Horizontal overflow on mobile — content wider than viewport', impact: 'Users must scroll sideways, high bounce' });
   if (opts.mobileChecks?.tapSpacingIssues > 5) redFlags.push({ severity: 'medium', category: 'design', message: `${opts.mobileChecks.tapSpacingIssues} tap targets too close together`, impact: 'Accidental taps, frustrated users' });
-  // Image red flags
   if (opts.imageIssues) {
     const withoutAlt = opts.imageIssues.filter((i: any) => !i.hasAlt).length;
     if (withoutAlt > 3) redFlags.push({ severity: 'high', category: 'seo', message: `${withoutAlt} images missing alt text`, impact: 'Lost SEO, accessibility violations' });
     if (opts.imageIssues.filter((i: any) => i.oversized).length > 3) redFlags.push({ severity: 'medium', category: 'performance', message: `${opts.imageIssues.filter((i: any) => i.oversized).length} images displayed smaller than actual size`, impact: 'Wasted bandwidth, slow load' });
   }
-  // Conversion red flags
   if (opts.conversionData) {
     const conv = opts.conversionData;
     if (!conv.hasPhone && !conv.hasEmail && conv.formCount === 0) redFlags.push({ severity: 'high', category: 'design', message: 'No visible contact info or forms', impact: 'Lost leads, visitors cannot reach the business' });

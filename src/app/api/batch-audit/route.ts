@@ -78,12 +78,13 @@ async function processBatch(batchId: string, batch: any, leads: any[]) {
 
             const url = lead.website || `https://${lead.name.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`;
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'}/api/audit`, {
+             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'}/api/audit`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url, depth: 2, maxPages: 10 }),
-                signal: AbortSignal.timeout(180000)
+                body: JSON.stringify({ url, mode: 'balanced' }),
+                signal: AbortSignal.timeout(600000) // Increase to 10 mins for balanced
             });
+
 
             if (res.ok) {
                 batch.leads[i].status = 'completed';
