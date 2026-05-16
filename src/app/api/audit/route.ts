@@ -465,16 +465,22 @@ function buildAudit(siteAudit: any, opts: {
     if (seoScore === 100 && allIssues.length === 0 && !siteAudit.seo) seoScore = 70;
   }
 
-  const overallScore = Math.min(100, Math.round(perfScore * 0.25 + seoScore * 0.20 + a11yScore * 0.15 + securityScore * 0.10 + designScore * 0.15 + conversionScore * 0.15));
+  const finalBrokenInternal = opts.linkResults?.broken ?? brokenInternal;
 
-  const redFlags: any[] = [];
+  // Compute preliminary critical count for overall score (will be updated after flags are built)
+  const mobileScoreForOverall = opts.mobileChecks?.hasOverflow ? 50 : 80;
+  const conversionData = opts.conversionData;
+  const preliminaryCriticalCount = (!hasHsts ? 1 : 0) + (robotsTxtDisallowAll ? 1 : 0) + (lcp > 4000 ? 1 : 0) + (finalBrokenInternal > 20 ? 1 : 0);
+  
+  const overallScore = computeOverallScore(perfScore, seoScore, a11yScore, securityScore, designScore, conversionScore, { mobileScore: mobileScoreForOverall, hasContactInfo: conversionData?.hasPhone || conversionData?.hasEmail || conversionData?.hasContactForm || conversionData?.formCount > 0, criticalIssueCount: preliminaryCriticalCount });
+
+  const redFlags: any[] = []
   const topFixes = siteAudit.rankedFixes || [];
   for (const fix of topFixes.slice(0, 10)) {
     const severity = fix.impact === 'high' ? 'critical' : fix.impact === 'medium' ? 'high' : 'medium';
     if (severity === 'critical' || severity === 'high') redFlags.push({ severity, category: fix.category, message: fix.title, impact: fix.description, affectedUrls: fix.affectedUrls?.slice(0, 5) || [] });
   }
   if (lcp > 4000) redFlags.unshift({ severity: 'critical', category: 'performance', message: `LCP ${(lcp / 1000).toFixed(1)}s — extremely slow`, impact: 'High bounce rate, Google ranking penalty' });
-  const finalBrokenInternal = opts.linkResults?.broken ?? brokenInternal;
   if (finalBrokenInternal > 20) redFlags.unshift({ severity: 'critical', category: 'links', message: `${finalBrokenInternal} broken links found`, impact: 'Lost SEO equity, users hitting 404 pages' });
   else if (finalBrokenInternal > 5) redFlags.push({ severity: 'high', category: 'links', message: `${finalBrokenInternal} broken links — needs repair`, impact: 'Users hitting dead pages, poor UX' });
   if (!hasHsts) redFlags.unshift({ severity: 'critical', category: 'security', message: 'Missing HSTS header', impact: 'Security risk, SEO downgrade' });
@@ -540,6 +546,65 @@ function buildAudit(siteAudit: any, opts: {
 
 function mapImpact(severity: string): 'critical' | 'serious' | 'moderate' | 'minor' {
   switch (severity?.toLowerCase()) { case 'error': return 'critical'; case 'warning': return 'serious'; case 'info': return 'moderate'; default: return 'moderate'; }
+}
+
+// === Smart Overall Score with Category Constraints ===
+function computeOverallScore(
+  perf: number, seo: number, a11y: number, security: number, design: number, conversion: number,
+  ctx: { mobileScore?: number; hasContactInfo: boolean; criticalIssueCount: number }
+): number {
+  // Apply category minimum constraints
+  let finalPerf = perf;
+  let finalSeo = seo;
+  let finalA11y = a11y;
+  let finalSecurity = security;
+  let finalDesign = design;
+  let finalConversion = conversion;
+
+  // Mobile constraint: poor mobile can't be offset by great desktop
+  if (ctx.mobileScore !== undefined && ctx.mobileScore < 40) {
+    finalPerf = Math.min(finalPerf, 65);
+    finalDesign = Math.min(finalDesign, 65);
+  }
+
+  // Critical issue constraints - can't have high overall with critical issues
+  if (ctx.criticalIssueCount > 2) {
+    const cap = 65;
+    finalPerf = Math.min(finalPerf, cap);
+    finalSeo = Math.min(finalSeo, cap);
+    finalConversion = Math.min(finalConversion, cap);
+  } else if (ctx.criticalIssueCount > 0) {
+    const cap = 75;
+    finalPerf = Math.min(finalPerf, cap);
+    finalSeo = Math.min(finalSeo, cap);
+    finalConversion = Math.min(finalConversion, cap);
+  }
+
+  // No contact info = massive conversion penalty
+  if (!ctx.hasContactInfo) {
+    finalConversion = Math.min(finalConversion, 30);
+  }
+
+  // Security missing HTTPS = hard cap
+  if (finalSecurity < 50) {
+    const cap = 60;
+    finalPerf = Math.min(finalPerf, cap);
+    finalSeo = Math.min(finalSeo, cap);
+    finalConversion = Math.min(finalConversion, cap);
+  }
+
+  // Weighted calculation
+  const weighted = Math.round(finalPerf * 0.25 + finalSeo * 0.20 + finalA11y * 0.15 + finalSecurity * 0.10 + finalDesign * 0.15 + finalConversion * 0.15);
+
+  // "Good enough" override: if no critical issues and all scores decent, boost slightly
+  const allDecent = finalPerf >= 60 && finalSeo >= 60 && finalA11y >= 50 && finalSecurity >= 50 && finalDesign >= 50 && finalConversion >= 50;
+  const noCritical = ctx.criticalIssueCount === 0 && ctx.mobileScore !== undefined && ctx.mobileScore >= 50;
+
+  if (allDecent && noCritical && weighted >= 70) {
+    return Math.min(100, weighted + 2); // Small boost for genuinely good sites
+  }
+
+  return Math.min(100, Math.max(0, weighted));
 }
 
 function getGrade(score: number): 'A' | 'B' | 'C' | 'D' | 'F' {
